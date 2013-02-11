@@ -12,7 +12,7 @@ public class BitDecoder {
 
 	
 	/**
-	 * Logic to turn on a specific bit
+	 * Logic to turnon a specific bit
 	 * */
 	private Integer setbit_32(int whichBit, int rawCode)	{
 		

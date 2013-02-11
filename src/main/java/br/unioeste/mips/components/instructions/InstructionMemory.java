@@ -12,12 +12,8 @@ public class InstructionMemory {
 
 	private ArrayList<br.unioeste.mips.common.instruction.Instruction> instructions;
 
-	public ArrayList<br.unioeste.mips.common.instruction.Instruction> getInstructions() {
-		return instructions;
-	}
-
-	public void setInstructions(
-			ArrayList<br.unioeste.mips.common.instruction.Instruction> instructions) {
+	public void setInstructions(ArrayList<br.unioeste.mips.common.instruction.Instruction> instructions) {
+		
 		this.instructions = instructions;
 	}
 

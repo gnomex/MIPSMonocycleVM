@@ -2,6 +2,29 @@ package br.unioeste.mips.util;
 
 public final class Global {
 
-	public static final int ZERO = 0x00000000;
-	public static final int BITMASK = 0x00000001;
+	public static final int ZERO	=	0x00000000;
+	public static final int BITMASK	=	0x00000001;
+	public static final int INSTRUCTIONSIZE	=	32;
+	
+	public static final String FILEREADER	=	"inputFile";
+	
+	/*
+	 * Instructions type
+	 * */
+	public static final int OPCODE_ITYPE	=	0x00000000;
+	public static final int OPCODE_JTYPE	=	0x00000000;
+	public static final int OPCODE_RTYPE	=	0x00000000;
+	/*
+	 * Instructions
+	 * */
+	public static final int ADD	=	0x00000020; //100000 - 32
+	public static final int SUB	=	0x00000022; //100010 - 34
+	public static final int AND	=	0x00000024; //100100 - 36
+	public static final int OR	=	0x00000025; //100101 - 37
+	
+	
+	/*
+	 * Loggers
+	 * */
+	public static final String LOADERLOG	=	"loaderlog.log";
 }

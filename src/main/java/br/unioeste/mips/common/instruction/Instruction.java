@@ -5,22 +5,17 @@ package br.unioeste.mips.common.instruction;
  * 
  * */
 
-import java.util.Map;
 
-public class Instruction {
-
-	/**
-	 * Map< type atribute, value >
-	 * */
-	private Map<String, Byte> inst;
-
-	public Map<String, Byte> getInst() {
-		return inst;
-	}
-
-	public void setInst(Map<String, Byte> inst) {
-		this.inst = inst;
-	}
+public class Instruction	{
 	
+	private int type;
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
 	
 }
