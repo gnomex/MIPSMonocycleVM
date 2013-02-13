@@ -11,7 +11,7 @@ public class InstructionR extends Instruction{
 	private Integer funct;
 	
 	public InstructionR()	{
-		this.setType(OPCODE_RTYPE);
+		this.setOpcode(OPCODE_RTYPE);
 	}
 	
 	public Integer getRs() {

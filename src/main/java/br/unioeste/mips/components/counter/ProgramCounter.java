@@ -1,5 +1,7 @@
 package br.unioeste.mips.components.counter;
 
+import static br.unioeste.mips.util.Global.PC_OFFSET;
+
 /**
  * Classe que representa o contador de instruções - Program Counter
  * 
@@ -8,6 +10,5 @@ package br.unioeste.mips.components.counter;
 public class ProgramCounter {
 
 	private Integer programCounter;		//
-	private Integer offsetBase;		//Base de deslocamento
 	
 }

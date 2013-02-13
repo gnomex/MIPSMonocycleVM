@@ -1,20 +1,50 @@
 package br.unioeste.mips.components.registers;
 
-import org.apache.log4j.Logger;
+import static br.unioeste.mips.util.Global.ZERO;
 
 public class Register {
 
 	private String name;
 	private String alias;
 	
-	private Integer value=0x00000000;//32 bits	#Dafault value is 0
+	private Integer value	=	ZERO;
 	
 	private Boolean writePermission;
+
 	
-	private Integer opAlu1;		//
-	private Integer opAlu2;		//
-	private Integer regResult;		//
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getAlias() {
+		return alias;
+	}
+
+	public void setAlias(String alias) {
+		this.alias = alias;
+	}
+
+	public Integer getValue() {
+		return value;
+	}
+
+	public void setValue(Integer value) {
+		this.value = value;
+	}
+
+	public Boolean getWritePermission() {
+		return writePermission;
+	}
+
+	public void setWritePermission(Boolean writePermission) {
+		this.writePermission = writePermission;
+	}
+
 	
-	private Logger logger;
+	
 	
 }

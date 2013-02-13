@@ -14,7 +14,7 @@ public class BitDecoder {
 	/**
 	 * Logic to turnon a specific bit
 	 * */
-	private Integer setbit_32(int whichBit, int rawCode)	{
+	private static Integer setbit(int whichBit, int rawCode)	{
 		
 		int set= BITMASK <<(whichBit - 1);
 		rawCode = (rawCode | set );
@@ -24,7 +24,7 @@ public class BitDecoder {
 	/**
 	 * Translate string to binary number
 	 * */
-	public int toBinari(String rawInstruction)	{
+	public static int toBinari(String rawInstruction)	{
 		
 		int raw = ZERO;
 		int decounter = rawInstruction.length();
@@ -32,11 +32,18 @@ public class BitDecoder {
 		for(int i=0; i< rawInstruction.length(); i++){
 			
 			if(rawInstruction.charAt(i) == '1'){
-				raw = setbit_32( decounter , raw);
+				raw = setbit( decounter , raw);
 			}
 			decounter--;
 		}
 		return raw;
+	}
+	
+	public static Integer getRangeBits(Integer instruction, int rawBeginIndex, int rawEndIndex){
+		
+		
+		
+		return null;
 	}
 	
 }

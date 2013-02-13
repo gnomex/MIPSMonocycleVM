@@ -1,8 +1,8 @@
 package br.unioeste.mips.components.circuit;
 
-public class Inversor implements Circuit{
+public class Inversor{
 
-	public Integer translate(Integer portA, Integer portB) {
+	public Integer make(Integer rawPort) {
 		// TODO Auto-generated method stub
 		return null;
 	}	
