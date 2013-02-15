@@ -18,5 +18,16 @@ public class NOTTest extends TestCase{
 		assertEquals(expected, notcircuit.doNot(tester));
 		
 	}
+	
+	@Test
+	public void testDoNot1() {
+		Integer expected	=	new Integer(1);
+		
+		NOT notcircuit	=	new NOT();
+		Integer tester	=	new Integer(0);
+		
+		assertEquals(expected, notcircuit.doNot(tester));
+		
+	}
 
 }

@@ -1,12 +1,11 @@
 package br.unioeste.mips.common.mux;
 
-import static br.unioeste.mips.util.Util.ONE;
 import static br.unioeste.mips.util.Util.ZERO;
 import br.unioeste.mips.components.circuit.NOT;
 
 	/**
 	 * 
-	 * Logical ports 1 and 2
+	 * Logical ports 1 and 0
 	 * 
 	 * */
 
@@ -18,26 +17,26 @@ public class Mux {
 	private final Integer portA	=	0;
 	private final Integer portB	=	1;
 	
-	private Integer select	=	ONE;	//Default
+	private Integer select	=	ZERO;	//Default
 
 	private Integer currentDataPortA;
 	private Integer currentDataPortB;
 
 	/**
 	 * Get open port
-	 * @Param: Select	port [1|2]
+	 * @Param: Select	port [0|1]
 	 * */
 	public Integer logicalMUX()		{
 
 		Integer result	=	new Integer(ZERO);
 		/*
-		 * (portA and Select) or (portB and not select)
+		 * (portA and not Select) or (portB and select)
 		 * 
 		 * The not are applied only in the first bit
 		 * 
 		 * */
-		br.unioeste.mips.components.circuit.NOT notCircuit	=	new NOT();
-		result	=	((portA & select) | (portB & ( notCircuit.doNot(select))));
+		NOT notCircuit	=	new NOT();
+		result	=	((portA & (notCircuit.doNot(select))) | (portB & select));
 
 		return result;
 

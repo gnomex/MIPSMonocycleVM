@@ -12,12 +12,12 @@ public class MuxTest extends TestCase{
 	@Test
 	public final void testPort0(){
 		
-		Integer expected	=	new Integer(9);
+		Integer expected	=	new Integer(9);	//Port A
 		
 		Mux mux	=	new Mux();
 		mux.setCurrentDataPortA(new Integer(9));
 		mux.setCurrentDataPortB(new Integer(7));
-		//Select as default 1
+		//Select as default 0
 		
 		assertEquals(expected, mux.getData());
 	}
@@ -25,12 +25,12 @@ public class MuxTest extends TestCase{
 	@Test
 	public final void testPort1()	{
 		
-		Integer expected	=	new Integer(7);
+		Integer expected	=	new Integer(255);	//Port B
 		
 		Mux mux	=	new Mux();
-		mux.setCurrentDataPortA(new Integer(9));
-		mux.setCurrentDataPortB(new Integer(7));
-		mux.setSelect(new Integer(2));	//Change select
+		mux.setCurrentDataPortA(new Integer(-1));
+		mux.setCurrentDataPortB(new Integer(255));
+		mux.setSelect(new Integer(1));	//Change select
 		
 		assertEquals(expected, mux.getData());
 	}
