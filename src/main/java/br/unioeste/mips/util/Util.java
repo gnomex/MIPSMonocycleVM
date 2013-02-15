@@ -3,6 +3,7 @@ package br.unioeste.mips.util;
 public final class Util {
 
 	public static final int ZERO	=	0x00000000;
+	public static final int ONE	=	0x00000001;
 	public static final int BITMASK	=	0x00000001;
 	
 	public static final int PC_OFFSET	=	1;

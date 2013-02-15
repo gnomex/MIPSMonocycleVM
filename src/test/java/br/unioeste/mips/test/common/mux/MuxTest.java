@@ -17,7 +17,7 @@ public class MuxTest extends TestCase{
 		Mux mux	=	new Mux();
 		mux.setCurrentDataPortA(new Integer(9));
 		mux.setCurrentDataPortB(new Integer(7));
-		//Select as default 0
+		//Select as default 1
 		
 		assertEquals(expected, mux.getData());
 	}
@@ -30,7 +30,7 @@ public class MuxTest extends TestCase{
 		Mux mux	=	new Mux();
 		mux.setCurrentDataPortA(new Integer(9));
 		mux.setCurrentDataPortB(new Integer(7));
-		mux.setSelect(new Integer(1));	//Change select
+		mux.setSelect(new Integer(2));	//Change select
 		
 		assertEquals(expected, mux.getData());
 	}

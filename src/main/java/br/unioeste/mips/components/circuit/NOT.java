@@ -7,12 +7,13 @@ public class NOT{
 	/**
 	 * Only 1 bit data way
 	 * */
-	public static Integer doNot(Integer rawPort) {
+	public Integer doNot(Integer rawPort) {
 		/*
 		 * Invert bit of lowest order
 		 * 
 		 * */
-		Integer result	=	rawPort & BITMASK;
+		Integer result	=	(~rawPort);
+		result	=	(result & BITMASK);
 		
 		return result;
 	}
