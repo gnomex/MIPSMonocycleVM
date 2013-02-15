@@ -1,8 +1,8 @@
 package br.unioeste.mips.components.circuit;
 
-import static br.unioeste.mips.util.Global.ZERO;
+import static br.unioeste.mips.util.Util.ZERO;
 
-public class AND implements Circuit{
+public class AND{
 
 	public Integer make(Integer rawPortA, Integer rawPortB) {
 		

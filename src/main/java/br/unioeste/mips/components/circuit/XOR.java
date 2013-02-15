@@ -1,8 +1,8 @@
 package br.unioeste.mips.components.circuit;
 
-import static br.unioeste.mips.util.Global.ZERO;
+import static br.unioeste.mips.util.Util.ZERO;
 
-public class XOR implements Circuit{
+public class XOR{
 
 	public Integer make(Integer rawPortA, Integer rawPortB) {
 		

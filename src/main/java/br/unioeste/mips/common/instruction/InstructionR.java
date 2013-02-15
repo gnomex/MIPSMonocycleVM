@@ -1,6 +1,6 @@
 package br.unioeste.mips.common.instruction;
 
-import static br.unioeste.mips.util.Global.OPCODE_RTYPE;
+import static br.unioeste.mips.util.Util.OPCODE_RTYPE;
 
 public class InstructionR extends Instruction{
 

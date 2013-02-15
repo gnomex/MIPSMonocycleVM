@@ -14,8 +14,8 @@ import br.unioeste.mips.common.exeption.InstructionException;
 import br.unioeste.mips.common.instruction.Instruction;
 import br.unioeste.mips.common.instruction.InstructionDecoder;
 
-import static br.unioeste.mips.util.Global.FILEREADER;
-import static br.unioeste.mips.util.Global.INSTRUCTIONSIZE;
+import static br.unioeste.mips.util.Util.FILEREADER;
+import static br.unioeste.mips.util.Util.INSTRUCTIONSIZE;
 
 
 public class ParserFileTXT implements ParserFactory {
@@ -66,8 +66,8 @@ public class ParserFileTXT implements ParserFactory {
 			return formated;
 
 		}else	{
-
-			throw new InstructionException("Instruction don't have 32 bits, check de foo file!!!");
+			
+			throw new InstructionException("Instruction don't have 32 bits, check de foo file!!!", logger);
 		}
 
 	}

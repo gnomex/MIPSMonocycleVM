@@ -1,6 +1,6 @@
 package br.unioeste.mips.util;
 
-public final class Global {
+public final class Util {
 
 	public static final int ZERO	=	0x00000000;
 	public static final int BITMASK	=	0x00000001;
@@ -49,4 +49,5 @@ public final class Global {
 	 * Loggers
 	 * */
 	public static final String LOADERLOG	=	"loaderlog.log";
+	public static final String REGSBASELOG	=	"regslog.log";
 }

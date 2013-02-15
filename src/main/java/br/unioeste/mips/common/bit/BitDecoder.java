@@ -1,7 +1,7 @@
 package br.unioeste.mips.common.bit;
 
-import static br.unioeste.mips.util.Global.BITMASK;
-import static br.unioeste.mips.util.Global.ZERO;
+import static br.unioeste.mips.util.Util.BITMASK;
+import static br.unioeste.mips.util.Util.ZERO;
 
 /**
  *Classe responsavel por transformar a instruçao de String para byte 

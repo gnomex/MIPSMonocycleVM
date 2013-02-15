@@ -1,6 +1,6 @@
 package br.unioeste.mips.common.adder;
 
-import static br.unioeste.mips.util.Global.ZERO;
+import static br.unioeste.mips.util.Util.ZERO;
 
 public class Adder {
 

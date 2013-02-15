@@ -1,8 +1,8 @@
 package br.unioeste.mips.common.shift;
 
-import static br.unioeste.mips.util.Global.ZERO;
-import static br.unioeste.mips.util.Global.LEFT;
-import static br.unioeste.mips.util.Global.RIGHT;
+import static br.unioeste.mips.util.Util.ZERO;
+import static br.unioeste.mips.util.Util.LEFT;
+import static br.unioeste.mips.util.Util.RIGHT;
 
 public class Shifter {
 
