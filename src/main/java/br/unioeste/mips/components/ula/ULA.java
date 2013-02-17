@@ -35,7 +35,7 @@ public class ULA {
 
 		case SUB:
 			result = rawInput1 - rawInput2;
-			zeroFlag	=	Boolean.TRUE;
+			verifyZeroFlag(result);
 		//	logger.info("SUB op");
 			break;
 
@@ -52,6 +52,14 @@ public class ULA {
 
 	}
 
+	private void verifyZeroFlag(Integer result)	{
+		
+		if(result.equals(new Integer(ZERO))){
+			this.zeroFlag	=	Boolean.TRUE;
+		}
+		
+	}
+	
 	public void setRawInput1(Integer rawInput1) {
 		this.rawInput1 = rawInput1;
 	}
@@ -64,7 +72,8 @@ public class ULA {
 		return result;
 	}
 
-	
-
+	public Boolean isActiveZeroFlag() {
+		return zeroFlag;
+	}
 
 }

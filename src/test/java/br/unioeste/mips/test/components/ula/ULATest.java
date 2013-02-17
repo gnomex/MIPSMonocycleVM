@@ -67,5 +67,17 @@ public class ULATest extends TestCase{
 		assertEquals(expected, ulaCircuit.getResult());
 		
 	}
+	
+	@Test
+	public void testExecuteZeroFlag()	{
+		Boolean expected	=	new Boolean(Boolean.TRUE);
+		
+		ULA ulaCircuit	=	new ULA();
+		ulaCircuit.setRawInput1(new Integer(1));
+		ulaCircuit.setRawInput2(new Integer(1));
+		ulaCircuit.execute(SUB);
+		
+		assertEquals(expected, ulaCircuit.isActiveZeroFlag());
+	}
 
 }
