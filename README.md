@@ -14,18 +14,14 @@ Suported instructions
 	Instructions
 	<ul>
 		<li>ADD</li>
-		<li>ADDi</li>
 		<li>SUB</li>
 		<li>AND</li>
-		<li>ANDi</li>
 		<li>OR</li>
-		<li>ORi</li>
-		<li>lui</li>
 		<li>lw</li>
 		<li>sw</li>
+		<li>ldi</li>
 		<li>beq</li>
 		<li>bne</li>
 		<li>j</li>
-		<li>jr</li>
 	</ul>
 </p>
