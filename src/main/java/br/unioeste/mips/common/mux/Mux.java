@@ -16,6 +16,8 @@ public class Mux {
 	 * */
 	private final Integer portA	=	0;
 	private final Integer portB	=	1;
+	private final Integer portC	=	2;
+	private final Integer portD	=	3;
 	
 	private Integer select	=	ZERO;	//Default
 
@@ -34,6 +36,10 @@ public class Mux {
 		 * 
 		 * The not are applied only in the first bit
 		 * 
+		 * */
+		/**
+		 * It's only 2 ports
+		 * Nedds change to 4 ports
 		 * */
 		NOT notCircuit	=	new NOT();
 		result	=	((portA & (notCircuit.doNot(select))) | (portB & select));

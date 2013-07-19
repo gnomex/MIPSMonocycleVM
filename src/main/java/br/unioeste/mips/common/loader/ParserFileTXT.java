@@ -10,7 +10,7 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import br.unioeste.mips.common.bit.BitDecoder;
-import br.unioeste.mips.common.exeption.InstructionException;
+import br.unioeste.mips.common.exception.InstructionException;
 import br.unioeste.mips.common.instruction.Instruction;
 import br.unioeste.mips.common.instruction.InstructionDecoder;
 
