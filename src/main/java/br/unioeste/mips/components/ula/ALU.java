@@ -13,7 +13,7 @@ public class ALU {
 	private Integer rawInput2	=	ZERO;
 	private Integer result	=	ZERO;
 
-	private Boolean zeroFlag= new Boolean(false);	//Default
+	private Boolean zeroFlag= new Boolean(false);	//Default 
 
 	//private Logger logger = Logger.getLogger(Registers.class);
 	
@@ -25,6 +25,8 @@ public class ALU {
 	public void execute(Integer ulaOperation){
 
 		//logger.debug("ULA receive: " + ulaOperation );
+		
+		this.zeroFlag = Boolean.FALSE;	//Force false
 		
 		switch (ulaOperation) {
 
