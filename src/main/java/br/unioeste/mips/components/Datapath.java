@@ -6,6 +6,7 @@ import br.unioeste.mips.components.instructions.InstructionRegister;
 import br.unioeste.mips.components.memory.DataMemory;
 import br.unioeste.mips.components.memory.TemporaryMemory;
 import br.unioeste.mips.components.registers.Register;
+import br.unioeste.mips.components.registers.Registers;
 import br.unioeste.mips.components.ula.ALU;
 import br.unioeste.mips.components.ula.control.ALUControlUnit;
 import br.unioeste.mips.dump.DumpListener;
@@ -23,7 +24,7 @@ public class Datapath {
 	private DataMemory memory	=	null;
 	
 	private InstructionRegister instructionRegister	=	null;
-	private Register registers	=	null;
+	private Registers registers	=	null;
 	
 	/**
 	 * All Mux's
@@ -53,6 +54,9 @@ public class Datapath {
 		controlUnit = new ControlUnit();
 		pc = new ProgramCounter();
 		memory = new DataMemory();
+		instructionRegister = new InstructionRegister();
+		
+		registers = new Registers();
 	}
 	
 	

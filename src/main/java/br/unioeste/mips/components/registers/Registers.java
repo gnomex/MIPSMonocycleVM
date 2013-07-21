@@ -1,15 +1,10 @@
 package br.unioeste.mips.components.registers;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.util.ArrayList;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import br.unioeste.mips.common.loader.ParserFileTXT;
-
-import static br.unioeste.mips.util.Util.FILEREADER;
 import static br.unioeste.mips.util.Util.ZERO;
 
 
@@ -41,24 +36,53 @@ public class Registers {
 	
 	private Boolean regWrite	=	new Boolean(Boolean.FALSE);	//Default
 	
+	private Integer RS	=	ZERO;	//Read Register 1
+	private Integer RD	=	ZERO;	//WriteRegister
+	private Integer RT	=	ZERO;	//Read Register 2
 	
-	private Integer addressOpUla1	=	null;		//
-	private Integer addressOpUla2	=	null;		//
-	private Integer adddressRegResult	=	null;		//
-	
-	private Logger logger = Logger.getLogger(Registers.class);
+	//private Logger logger = Logger.getLogger(Registers.class);
 	
 	
 	public Registers()	{
 		dataregister	=	new ArrayList<Register>();
 		this.__initRegister();
 		
-		logger.setLevel(Level.INFO);
-		logger.info("Initializing Regs base");
+		//logger.setLevel(Level.INFO);
+		//logger.info("Initializing Regs base");
 		
 	}
 	
 	
+	public void setRS(Integer rS) {
+		RS = rS;
+	}
+
+	public void setRD(Integer rD) {
+		RD = rD;
+	}
+
+	public void setRT(Integer rT) {
+		RT = rT;
+	}
+
+	public void setWriteData(Integer value)	{
+		
+		Register reg = dataregister.get(this.RD);
+		reg.setValue(value);
+		
+		dataregister.add(this.RD, reg);
+		
+	}
+
+	public Integer getALUOp1(){
+		return dataregister.get(this.RS).getValue();
+	}
+	
+	public Integer getALUOp2(){
+		return dataregister.get(this.RT).getValue();
+	}
+	
+
 	private void __initRegister()	{
 		
 		try{
@@ -72,12 +96,11 @@ public class Registers {
 				dataregister.add(reg);		
 			}
 			
-			logger.info("Regs initializate!");
+			//logger.info("Regs initializate!");
 			
 		}catch (Exception e) {
-			logger.error("Error: " + e.getMessage());	//Logger the error	
-		}
-		
+			//logger.error("Error: " + e.getMessage());	//Logger the error	
+		}	
 	}
 	
 }
