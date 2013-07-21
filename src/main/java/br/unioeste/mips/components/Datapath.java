@@ -1,6 +1,8 @@
 package br.unioeste.mips.components;
 
-import br.unioeste.mips.common.mux.Mux;
+import br.unioeste.mips.common.mux.Mux2LogicalGates;
+import br.unioeste.mips.common.mux.Mux4LogicalGates;
+import br.unioeste.mips.components.counter.PCWriteControl;
 import br.unioeste.mips.components.counter.ProgramCounter;
 import br.unioeste.mips.components.instructions.InstructionRegister;
 import br.unioeste.mips.components.memory.DataMemory;
@@ -10,7 +12,7 @@ import br.unioeste.mips.components.registers.Registers;
 import br.unioeste.mips.components.ula.ALU;
 import br.unioeste.mips.components.ula.control.ALUControlUnit;
 import br.unioeste.mips.dump.DumpListener;
-
+import static br.unioeste.mips.util.Util.PC_OFFSET;
 	/**
 	 * Risc Multicycle datapath
 	 * */
@@ -21,6 +23,7 @@ public class Datapath {
 	private ALUControlUnit aluControl	=	null;
 	private ControlUnit controlUnit	=	null;
 	private ProgramCounter pc	=	null;
+	private PCWriteControl pcwriteControl = null;
 	private DataMemory memory	=	null;
 	
 	private InstructionRegister instructionRegister	=	null;
@@ -29,12 +32,14 @@ public class Datapath {
 	/**
 	 * All Mux's
 	 * */
-	private Mux IORD	=	null;
-	private Mux REGDST	=	null;
-	private Mux MEMTOREG	=	null;
-	private Mux ALUSRCA	=	null;
-	private Mux ALUSRCB	=	null;
-	private Mux PCSOURCE	=	null;
+	private Mux2LogicalGates IORD	=	null;
+	private Mux2LogicalGates REGDST	=	null;
+	private Mux2LogicalGates MEMTOREG	=	null;
+	private Mux2LogicalGates ALUSRCA	=	null;
+		
+	private Mux4LogicalGates ALUSRCB	=	null;
+	private Mux4LogicalGates PCSOURCE	=	null;
+	
 	
 	private TemporaryMemory A	=	null;
 	private TemporaryMemory B	=	null;
@@ -52,11 +57,28 @@ public class Datapath {
 		aluControl = new ALUControlUnit(ula);
 		
 		controlUnit = new ControlUnit();
+		pcwriteControl = new PCWriteControl();
 		pc = new ProgramCounter();
 		memory = new DataMemory();
 		instructionRegister = new InstructionRegister();
 		
 		registers = new Registers();
+		
+		IORD = new Mux2LogicalGates();
+		REGDST = new Mux2LogicalGates();
+		MEMTOREG = new Mux2LogicalGates();
+		ALUSRCA = new Mux2LogicalGates();
+		ALUSRCB = new Mux4LogicalGates();
+		ALUSRCB.setCurrentDataPortB(PC_OFFSET);	//Default offset SUM
+		PCSOURCE = new Mux4LogicalGates();
+		
+		this.A = new TemporaryMemory();
+		this.B = new TemporaryMemory();
+		ALUOUT = new TemporaryMemory();
+		
+		memoryDataRegister = new Register();
+		memoryDataRegister.setName("Memory Data Register");
+		memoryDataRegister.setWritePermission(Boolean.TRUE);
 	}
 	
 	
