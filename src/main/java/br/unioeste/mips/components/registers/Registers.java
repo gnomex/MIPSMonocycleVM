@@ -29,7 +29,7 @@ import static br.unioeste.mips.util.Util.ZERO;
 
 public class Registers {
 
-	private ArrayList<Register> dataregister;
+	private ArrayList<Register> dataregisters;
 	
 	private Boolean regWrite	=	new Boolean(Boolean.FALSE);	//Default
 	
@@ -41,7 +41,7 @@ public class Registers {
 	
 	
 	public Registers()	{
-		dataregister	=	new ArrayList<Register>();
+		dataregisters	=	new ArrayList<Register>(32);
 		this.__initRegister();
 		
 		//logger.setLevel(Level.INFO);
@@ -64,19 +64,19 @@ public class Registers {
 
 	public void setWriteData(Integer value)	{
 		
-		Register reg = dataregister.get(this.RD);
+		Register reg = dataregisters.get(this.RD);
 		reg.setValue(value);
 		
-		dataregister.add(this.RD, reg);
+		dataregisters.add(this.RD, reg);
 		
 	}
 
 	public Integer getALUOp1(){
-		return dataregister.get(this.RS).getValue();
+		return dataregisters.get(this.RS).getValue();
 	}
 	
 	public Integer getALUOp2(){
-		return dataregister.get(this.RT).getValue();
+		return dataregisters.get(this.RT).getValue();
 	}
 	
 
@@ -90,10 +90,11 @@ public class Registers {
 				reg.setValue(ZERO);	//Default value
 				reg.setWritePermission(Boolean.FALSE);
 				
-				dataregister.add(reg);		
+				dataregisters.add(reg);		
 			}
 			
-			//logger.info("Regs initializate!");
+			System.out.println("All register are initialized");
+			//logger.info("Regs initialized!");
 			
 		}catch (Exception e) {
 			//logger.error("Error: " + e.getMessage());	//Logger the error	

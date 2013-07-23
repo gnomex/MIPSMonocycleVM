@@ -7,8 +7,8 @@ import br.unioeste.mips.common.instruction.Instruction;
 
 public class DataMemory {
 
-	private Boolean MEMWRITE;
-	private Boolean MEMREAD;
+	private Boolean MEMWRITE = Boolean.FALSE;
+	private Boolean MEMREAD = Boolean.FALSE;
 
 	private ArrayList<Integer> datamemory;
 	private ArrayList<Instruction> instructions;
@@ -19,13 +19,18 @@ public class DataMemory {
 		this.addressIndex = adrressIndex;
 	}
 
+	public DataMemory()	{
+		datamemory = new ArrayList<Integer>();
+		instructions = new ArrayList<Instruction>();
+		System.out.println("Memory initialized\n--Instruction range protection: Done\n--Data segment: Done");
+	}
 	
 	
 	public Instruction getInstruction()	throws Exception{
 
 		try {
 
-			if	(MEMWRITE == Boolean.TRUE)	{
+			if	(MEMWRITE)	{
 				return instructions.get(this.addressIndex);
 			} else	{
 				throw new MemoryPermissionDenied("Flag MEMREAD is not active!");
@@ -40,7 +45,7 @@ public class DataMemory {
 
 		try {
 
-			if	(MEMWRITE == Boolean.TRUE)	{
+			if	(MEMWRITE)	{
 				return datamemory.get(this.addressIndex);
 			} else	{
 				throw new MemoryPermissionDenied("Flag MEMREAD is not active!");
@@ -55,7 +60,7 @@ public class DataMemory {
 
 		try {
 
-			if	(MEMREAD == Boolean.TRUE)	{
+			if	(MEMREAD)	{
 				instructions.add(this.addressIndex, element);
 			} else	{
 				throw new MemoryPermissionDenied("Flag MEMWRITE is not active!");
@@ -68,7 +73,7 @@ public class DataMemory {
 	}
 	public void push(Integer element)	throws Exception{
 		try {
-			if	(MEMREAD == Boolean.TRUE)	{
+			if	(MEMREAD)	{
 				datamemory.add(this.addressIndex, element);
 			} else	{
 				throw new MemoryPermissionDenied("Flag MEMWRITE is not active!");

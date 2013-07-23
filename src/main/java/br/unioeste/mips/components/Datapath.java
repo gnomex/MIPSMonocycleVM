@@ -1,5 +1,7 @@
 package br.unioeste.mips.components;
 
+import java.awt.EventQueue;
+
 import br.unioeste.mips.common.mux.Mux2LogicalGates;
 import br.unioeste.mips.common.mux.Mux4LogicalGates;
 import br.unioeste.mips.components.counter.PCWriteControl;
@@ -12,6 +14,7 @@ import br.unioeste.mips.components.registers.Registers;
 import br.unioeste.mips.components.ula.ALU;
 import br.unioeste.mips.components.ula.control.ALUControlUnit;
 import br.unioeste.mips.dump.DumpListener;
+import br.unioeste.mips.gui.MipsMonitorGUI;
 import static br.unioeste.mips.util.Util.PC_OFFSET;
 	/**
 	 * Risc Multicycle datapath
@@ -50,9 +53,14 @@ public class Datapath {
 	/**
 	 * Makes a datapath Snapshot and send to GUI
 	 * */
-	private DumpListener dump;	//Observer Pattern
+	private DumpListener dump;	//Observer Pattern - to get snapshots and send to GUI
 	
+	/**
+	 * Big Constructor
+	 * Initializes all datapath components
+	 * */
 	public Datapath()	{
+		
 		ula = new ALU();
 		aluControl = new ALUControlUnit(ula);
 		
@@ -79,8 +87,27 @@ public class Datapath {
 		memoryDataRegister = new Register();
 		memoryDataRegister.setName("Memory Data Register");
 		memoryDataRegister.setWritePermission(Boolean.TRUE);
+		
+		System.err.println("##\n\n  Datapath loaded, waiting for work!\n\n##");
+		
 	}
 	
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					//Try new instance datapath
+					Datapath datapath = new Datapath();
+					
+					System.out.println("Work!");
+					
+				} catch (Exception e) {
+					System.out.println("Problems :(\n\n\n###########################");
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 	
 	
 }
