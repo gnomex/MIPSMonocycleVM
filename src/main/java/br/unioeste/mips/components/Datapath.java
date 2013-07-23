@@ -14,7 +14,6 @@ import br.unioeste.mips.components.registers.Registers;
 import br.unioeste.mips.components.ula.ALU;
 import br.unioeste.mips.components.ula.control.ALUControlUnit;
 import br.unioeste.mips.dump.DumpListener;
-import br.unioeste.mips.gui.MipsMonitorGUI;
 import static br.unioeste.mips.util.Util.PC_OFFSET;
 	/**
 	 * Risc Multicycle datapath
@@ -92,6 +91,19 @@ public class Datapath {
 		
 	}
 	
+	/**
+	 * The methods below interpreter the transmission of bits of one component to another
+	 * */
+	
+	
+	
+	
+	
+	
+	
+	/*
+	 * ========================================================================
+	 * */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
