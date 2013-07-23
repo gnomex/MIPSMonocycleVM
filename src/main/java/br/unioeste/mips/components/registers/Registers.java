@@ -66,7 +66,8 @@ public class Registers {
 		
 		Register reg = dataregisters.get(this.RD);
 		reg.setValue(value);
-		
+
+		//Write back on list
 		dataregisters.add(this.RD, reg);
 		
 	}

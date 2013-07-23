@@ -4,10 +4,11 @@ import br.unioeste.mips.components.registers.Register;
 
 public class InstructionRegister {
 
-	private Register r3126;
-	private Register r2521;
-	private Register r2016;
-	private Register r150;
+	private Register r3126;	//rs
+	private Register r2521;	//rt
+	private Register r2016;	//rd
+	private Register r150;	//Shamt, funct, imm
+	
 	public Register getR3126() {
 		return r3126;
 	}

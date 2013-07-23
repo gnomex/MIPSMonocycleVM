@@ -29,4 +29,14 @@ public class ControlStateUnit {
 		commands.add(new InstructionFetchState0(mipsDatapath));
 		commands.add(new InstructionDecodeState1(mipsDatapath));		
 	}
+	
+	private void execute()	{
+		try{
+			for	(Command cm : commands)	{
+				cm.performs();
+			}
+		}catch (Exception e)	{
+			e.printStackTrace();
+		}
+	}
 }
