@@ -7,9 +7,14 @@ public class WriteBackState4  implements Command{
 
 	private Datapath dataPath;
 
+	public WriteBackState4(Datapath datapath)	{
+		this.dataPath = datapath;
+	}
+	
 	public void performs() {
-		// TODO Auto-generated method stub
-		
+		dataPath.setSelectREGDST(new Integer(0));
+		dataPath.setREGWRITE(Boolean.TRUE);
+		dataPath.setSelectMEMTOREG(new Integer(0));
 	}
 
 }

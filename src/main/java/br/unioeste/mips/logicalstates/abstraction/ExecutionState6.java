@@ -7,8 +7,14 @@ public class ExecutionState6  implements Command{
 
 	private Datapath dataPath;
 
+	public ExecutionState6(Datapath datapath)	{
+		this.dataPath = datapath;
+	}
+	
 	public void performs() {
-		// TODO Auto-generated method stub
+		dataPath.setSelectALUSRCA(new Integer(1));
+		dataPath.setSelectALUSRCB(new Integer(0));
+		dataPath.setALUOP(new Integer(2));
 		
 	}
 

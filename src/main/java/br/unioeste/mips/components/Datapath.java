@@ -2,8 +2,11 @@ package br.unioeste.mips.components;
 
 import java.awt.EventQueue;
 
+import br.unioeste.mips.common.exception.IncrasePCOverflow;
+import br.unioeste.mips.common.exception.MUXSelectionOutOfBounds;
 import br.unioeste.mips.common.mux.Mux2LogicalGates;
 import br.unioeste.mips.common.mux.Mux4LogicalGates;
+import br.unioeste.mips.common.shift.Shifter;
 import br.unioeste.mips.components.counter.PCWriteControl;
 import br.unioeste.mips.components.counter.ProgramCounter;
 import br.unioeste.mips.components.instructions.InstructionRegister;
@@ -15,6 +18,8 @@ import br.unioeste.mips.components.ula.ALU;
 import br.unioeste.mips.components.ula.control.ALUControlUnit;
 import br.unioeste.mips.dump.DumpListener;
 import static br.unioeste.mips.util.Util.PC_OFFSET;
+import static br.unioeste.mips.util.Util.LEFT;
+
 	/**
 	 * Risc Multicycle datapath
 	 * */
@@ -53,7 +58,7 @@ public class Datapath {
 	/**
 	 * Makes a datapath Snapshot and send to GUI
 	 * */
-	private DumpListener dump;	//Observer Pattern - to get snapshots and send to GUI
+	//private DumpListener dump;	//Observer Pattern - to get snapshots and send to GUI
 	
 	/**
 	 * Big Constructor
@@ -62,7 +67,7 @@ public class Datapath {
 	public Datapath()	{
 		
 		ula = new ALU();
-		aluControl = new ALUControlUnit(ula);
+		aluControl = new ALUControlUnit();
 		
 		controlUnit = new ControlUnit();
 		pcwriteControl = new PCWriteControl();
@@ -97,7 +102,7 @@ public class Datapath {
 	 * */
 	/*
 	 * Set Muxs flags
-	 * 
+	 */
 	public void setSelectIORD(Integer selectFlag)	{
 		IORD.setSelect(selectFlag);
 	}
@@ -116,12 +121,36 @@ public class Datapath {
 	public void setSelectPCSOURCE(Integer selectFlag)	{
 		PCSOURCE.setSelect(selectFlag);
 	}
-	*/
+	
 		
 	public void notifyFlags()	{
 		// [31-26] bits to control unit - Decode flags and
 		//set components flags
 		//update all datapath
+		/*
+		 * */
+	}
+	
+	public void setIRWRITE(Boolean flagIRWRITE)	{
+		
+		instructionRegister.setIRWRITE(flagIRWRITE);
+		
+	}
+	
+	public void setPCWRITE(Integer flagPCWIRTE)	{
+		pcwriteControl.setPCWRITE(flagPCWIRTE);
+	}
+	
+	public void setMEMREAD(Boolean flagMEMREAD){
+		//memory.setMEMREAD(flagMEMREAD);
+	}
+	
+	public void setMEMWRITE(Boolean flagMEMWRITE)	{
+		//memory.setMEMWIRTE(flagMEMWRITE);
+	}
+
+	public void setREGWRITE(Boolean flagREGWRITE)	{
+		
 	}
 	
 	/*
@@ -129,97 +158,173 @@ public class Datapath {
 	 * */
 	public void PcToIORD(){
 		
+		IORD.setCurrentDataPortA(pc.getPC());
+		
 	}
 	public void PcToALUSRCA()	{
+		
+		ALUSRCA.setCurrentDataPortA(pc.getPC());
 		
 	}
 	public void ALUOUTToIORD()	{
 		
-	}
-	public void IorDToMemory(){
+		IORD.setCurrentDataPortB(ALUOUT.getRawValue());
 		
 	}
-	public void MemoryToMemoryDataRegister(){
+	public void IorDToMemory() throws MUXSelectionOutOfBounds{
+		
+		memory.setAdrress(IORD.getData());
 		
 	}
-	public void MemoryToInstructionRegister(){
+	public void MemoryToMemoryDataRegister() throws Exception{
+		
+		memoryDataRegister.setValue(memory.getData());
+		
+	}
+	public void MemoryToInstructionRegister() throws Exception{
+		
+		instructionRegister.setInstruction(memory.getInstruction());
+		
+		instructionRegister.transcodeInstruction();
 		
 	}
 	public void InstructionRegisterR3126ToControlUnit(){
 		
+		
+		
 	}
 	public void InstructionRegisterR2521ToRSRegister(){
+		
+		registers.setRS(instructionRegister.getR2521());
 		
 	}
 	public void InstructionRegisterR2016ToRTRegister(){
 		
+		registers.setRT(instructionRegister.getR2016());
+		
 	}
 	public void InstructionRegisterR2016ToREGDST(){
+	
+		REGDST.setCurrentDataPortA(instructionRegister.getR2016());;
 		
 	}
 	public void InstructionRegisterR150ToREGDST(){
+	
+		REGDST.setCurrentDataPortB(instructionRegister.getR150());
 		
 	}
-	public void REGDSTToRDRegister(){
+	public void REGDSTToRDRegister() throws MUXSelectionOutOfBounds{
+		
+		registers.setRD(REGDST.getData());
 		
 	}
-	public void MEMTOREGToWriteDataRegister(){
+	public void MEMTOREGToWriteDataRegister() throws MUXSelectionOutOfBounds{
+		
+		registers.setWriteData(MEMTOREG.getData());
 		
 	}
 	public void MemoryDataRegisterToMEMTOREG(){
 		
+		MEMTOREG.setCurrentDataPortB(memoryDataRegister.getValue());
+		
 	}
 	public void ALUOUTToMEMTOREG(){
+		
+		MEMTOREG.setCurrentDataPortA(ALUOUT.getRawValue());
 		
 	}
 	public void ALUOUTToPCSource()	{
 		
+		PCSOURCE.setCurrentDataPortB(ALUOUT.getRawValue());
+		
 	}
 	public void RegisterReadData1ToA(){
+		
+		A.setTemporaryValue(registers.getALUOp1());
 		
 	}
 	public void RegisterReadData1ToB(){
 		
+		B.setTemporaryValue(registers.getALUOp2());
+		
 	}
 	public void AToALUSRCA()	{
+		
+		ALUSRCA.setCurrentDataPortB(A.getRawValue());
 		
 	}
 	public void BToALUSRCB(){
 		
+		ALUSRCB.setCurrentDataPortA(B.getRawValue());
+		
 	}
-	public void BToMemoryWriteData()	{
+	public void BToMemoryWriteData() throws Exception	{
+		
+		memory.push(B.getRawValue());
 		
 	}
 	public void InstructionRegisterR150ToALUSRCB()	{
 		
+		ALUSRCB.setCurrentDataPortC(instructionRegister.getR150());
+		
 	}
 	public void InstructionRegisterR150SHIFTERToALUSRCB()	{
 		
-	}
-	public void ALUSRCAToAlu()	{
+		Integer toshift = instructionRegister.getR150();
+		Shifter.shift(toshift, 2, LEFT);
 		
 	}
-	public void ALUSRCBToAlu()	{
+	public void ALUSRCAToAlu() throws MUXSelectionOutOfBounds	{
+		
+		ula.setRawInput1(ALUSRCA.getData());
+		
+	}
+	public void ALUSRCBToAlu() throws MUXSelectionOutOfBounds	{
+		
+		ula.setRawInput2(ALUSRCB.getData());
 		
 	}
 	public void ALUToALUOUT()	{
+	
+		ALUOUT.setTemporaryValue(ula.getResult());
 		
 	}
 	public void ALUToPCSource()	{
 		
+		PCSOURCE.setCurrentDataPortA(ula.getResult());
+		
 	}
 	public void ALUZeroToPcWriteControl()	{
 		
+		pcwriteControl.setALUZEROFLAG(ula.isActiveZeroFlag());
+		
 	}
-	public void PcSourceToPC()	{
+	public void PcSourceToPC() throws IncrasePCOverflow, MUXSelectionOutOfBounds	{
+		
+		pc.incrasePC(PCSOURCE.getData());
 		
 	}
 	//Needs get PC[31-28] bits
 	public void InstructionRegisterJumpAddressToPcSource()	{
 		
+		Integer j250 = instructionRegister.get250();
+		
+		Shifter.shift(j250, 2, LEFT);
+		
 	}
 	
+	public void ALUEXECUTE()	{
+		ula.execute(aluControl.getALUOPERATION());
+	}
 	
+	/*
+	 * ALU Control Unit
+	 * */
+	
+	public void setALUOP(Integer aluop){
+		aluControl.setRaw6bits(aluop);
+		aluControl.decode();
+	}
 	
 	/*
 	 * ========================================================================

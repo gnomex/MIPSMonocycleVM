@@ -7,9 +7,14 @@ public class MemoryAcessLoadState3  implements Command{
 
 	private Datapath dataPath;
 
-	public void performs() {
-		// TODO Auto-generated method stub
-		
+	public MemoryAcessLoadState3(Datapath datapath)	{
+		this.dataPath = datapath;
 	}
+	
+	public void performs() {
+		dataPath.setMEMREAD(Boolean.TRUE);
+		dataPath.setSelectIORD(new Integer(1));
+	}
+	
 
 }

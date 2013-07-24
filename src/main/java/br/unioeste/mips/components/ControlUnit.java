@@ -44,6 +44,127 @@ public class ControlUnit {
 		REGDST	=	ZERO;
 		
 	}
+	/*
+	public void decode(Integer opcode)	{
+		
+		switch (opcode) {
+		
+		case 0://Rtype
+			this.setRtype();
+			break;
+		case 2://j
+			this.Jump=1;
+			break;
+		case 35://lw
+			this.RegDst = 0;
+			this.ALUsrc = 1;
+			this.MemToReg = 1;
+			this.RegWrite=1;
+			this.MemRead=true;
+			this.MemWrite=false;
+			this.Branch=false;
+			//this.ALUOp1=0;
+			//this.ALUOp0=0;
+			this.ALUop=0;
+			this.Jump=0;
+			break;
+		case 43://sw
+			this.ALUsrc = 1;
+			this.RegWrite=0;
+			this.MemToReg = 0;
+			this.MemRead=false;
+			this.MemWrite=true;
+			this.Branch=false;
+			//this.ALUOp1=0;
+			//this.ALUOp0=0;
+			this.ALUop=0;
+			this.Jump=0;
+			break;
+		case 15://lui - idem addi, porém reg rs é o zero
+			this.RegDst = 0;
+			this.ALUsrc = 1;
+			this.MemToReg = 0;
+			this.RegWrite=1;
+			//this.MemRead=1;
+			//this.MemWrite=0;
+			this.Branch=false;
+			this.Bne=false;
+			//this.ALUOp1=0;
+			//this.ALUOp0=0;
+			this.ALUop=0;
+			this.Jump=0;
+			break;
+		case 8://addi
+			this.RegDst = 0;
+			this.ALUsrc = 1;
+			this.MemToReg = 0;
+			this.RegWrite=1;
+			//this.MemRead=1;
+			//this.MemWrite=0;
+			this.Branch=false;
+			//this.ALUOp1=0;
+			//this.ALUOp0=0;
+			this.ALUop=0;
+			break;
+			
+		case 12://andi
+			this.RegDst = 0;
+			this.ALUsrc = 1;
+			this.MemToReg = 0;
+			this.RegWrite=1;
+			//this.MemRead=1;
+			//this.MemWrite=0;
+			this.Branch=false;
+			//this.ALUOp1=0;
+			//this.ALUOp0=0;
+			this.ALUop=5;//Nao sei se existe, mas nao tem conflito até o momento
+			break;
+			
+		case 13://ori
+			this.RegDst = 0;
+			this.ALUsrc = 1;
+			this.MemToReg = 0;
+			this.RegWrite=1;
+			//this.MemRead=1;
+			//this.MemWrite=0;
+			this.Branch=false;
+			//this.ALUOp1=0;
+			//this.ALUOp0=0;
+			this.ALUop=6;//Nao sei se existe, mas nao tem conflito até o momento
+			break;
+			
+			
+		case 4://beq
+			this.RegDst = 0;
+			this.ALUsrc = 0;
+			this.RegWrite=1;
+			this.MemToReg = 0;
+			this.MemRead=false;
+			this.MemWrite=false;
+			this.Branch=true;
+			//this.ALUOp1=0;
+			//this.ALUOp0=1;
+			this.Bne=false;
+			this.ALUop=1;
+			this.Jump=0;
+			break;
+		case 5://bne
+			this.RegDst = 0;
+			this.ALUsrc = 0;
+			this.MemToReg = 0;
+			this.RegWrite=1;
+			this.MemRead=false;
+			this.MemWrite=false;
+			this.Branch=false;
+			this.Bne=true;
+			//this.ALUOp1=0;
+			//this.ALUOp0=1;
+			this.ALUop = 1; 
+			this.Jump=0;
+			break;
+	}
+		
+	}*/
 	
 	public Integer getPCWRITECOND() {
 		return PCWRITECOND;

@@ -1,6 +1,7 @@
 package br.unioeste.mips.components.ula.control;
 
-import br.unioeste.mips.components.ula.ALU;
+//import br.unioeste.mips.components.ula.ALU;
+import static br.unioeste.mips.util.Util.ADD;
 
 /**
  * Unidade de controle da ALU
@@ -13,20 +14,20 @@ import br.unioeste.mips.components.ula.ALU;
 public class ALUControlUnit {
 
 	private Integer raw6bits;
-	private Integer ALUOP;
+	private Integer ALUOP;	//
 	
-	private ALU ulareference;
+	/*private ALU ulareference;
 	
 	public ALUControlUnit(ALU ulareference)	{
 		this.ulareference = ulareference;
-	}
+	}*/
 	
 	public void setRaw6bits(Integer rawbit)	{
 		this.raw6bits = rawbit;
 	}
-	
-	public void setALUOP(Integer ALUOP)	{
-		this.ALUOP = ALUOP;
+		
+	public Integer getALUOPERATION()	{
+		return this.ALUOP;
 	}
 	
 	/*
@@ -34,11 +35,15 @@ public class ALUControlUnit {
 	 * 
 	 * */
 	public void decode()	{
-		switch (ALUOP) {
-		case 0:
-			//do-something
+		switch (raw6bits) {
+		case ADD:
+			ALUOP = ADD;
+			
 			break;
 
+			/*
+			 * all anothers operations
+			 * */
 		default:
 			break;
 		}
