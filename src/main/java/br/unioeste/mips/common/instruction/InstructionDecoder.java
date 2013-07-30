@@ -23,6 +23,8 @@ public class InstructionDecoder {
 
 		Integer opcode = decoder.getRangeBits(raw, 25, 31);
 		
+		System.out.println("Opcode: " + Integer.toBinaryString(opcode));
+		
 		try {
 			
 			switch (opcode) {

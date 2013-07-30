@@ -5,7 +5,7 @@ package br.unioeste.mips.common.instruction;
  * 
  * */
 
-public class Instruction	{
+public abstract class Instruction	{
 	
 	private Integer opcode;
 	

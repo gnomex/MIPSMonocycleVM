@@ -34,6 +34,7 @@ public class ControlStateUnit {
 		try{
 			for	(Command cm : commands)	{
 				cm.performs();
+				
 			}
 		}catch (Exception e)	{
 			e.printStackTrace();

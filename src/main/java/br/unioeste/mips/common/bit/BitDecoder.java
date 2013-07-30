@@ -16,10 +16,11 @@ public class BitDecoder {
 	
 	/**
 	 * Logic to turnon a specific bit
+	 * 00111100000100000000000000000101
 	 * */
 	private static Integer setbit(int whichBit, int rawCode)	{
 		
-		int set= BITMASK <<(whichBit - 1);
+		int set= BITMASK << (whichBit);
 		rawCode = (rawCode | set );
 		
 		return new Integer(rawCode);
@@ -30,7 +31,7 @@ public class BitDecoder {
 	public static int toBinari(String rawInstruction)	{
 		
 		int raw = ZERO;
-		int decounter = rawInstruction.length();
+		int decounter = 31;
 		
 		for(int i=0; i< rawInstruction.length(); i++){
 			
@@ -39,24 +40,24 @@ public class BitDecoder {
 			}
 			decounter--;
 		}
+		System.out.println("  #" + Integer.toBinaryString(raw));
 		return raw;
 	}
 	/**
 	 * Index is right to left
-	 * 
 	 * */
 	public Integer getRangeBits(Integer instruction, int rawBeginIndex, int rawEndIndex){
 		//Index range
-		int range	=	(rawEndIndex - rawBeginIndex) + 1;
+		int range	=	(rawEndIndex - rawBeginIndex);
 		
 		//shift range size
-		int shiftRange	=	rawBeginIndex - 1;
+		int shiftRange	=	rawBeginIndex + 1;
 		
 		//Mask to get range
 		int mask	=	getMaskOfRangebits(range);
 		
 		//Change mask to range compatible
-		mask	=	mask <<(shiftRange);
+		mask	=	mask << (shiftRange);
 		int result	=	ZERO;
 	
 		//Apply mask to get bits
@@ -65,7 +66,7 @@ public class BitDecoder {
 		//
 		result	=	result >>>(shiftRange);	//The operator >>> is because increase 0 on left
 		
-		return new Integer(result);
+		return result;
 	}
 	
 	/*
@@ -75,7 +76,7 @@ public class BitDecoder {
 		
 		int result	=	ZERO;
 		
-		for (int i = 1; i <= range; i++) {
+		for (int i = 0; i <= range; i++) {
 			result	=	setbit(i, result);
 		}
 		return result;

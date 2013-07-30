@@ -24,7 +24,7 @@ import static br.unioeste.mips.util.Util.LEFT;
 	 * Risc Multicycle datapath
 	 * */
 
-public class Datapath {
+public class Datapath implements Cloneable{
 	
 	private ALU ula	=	null;
 	private ALUControlUnit aluControl	=	null;
