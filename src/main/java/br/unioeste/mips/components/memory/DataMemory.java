@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import br.unioeste.mips.common.exception.MemoryPermissionDenied;
 import br.unioeste.mips.common.instruction.Instruction;
+import br.unioeste.mips.common.loader.ParserFileTXT;
 
 public class DataMemory {
 
@@ -21,7 +22,18 @@ public class DataMemory {
 
 	public DataMemory()	{
 		datamemory = new ArrayList<Integer>();
-		instructions = new ArrayList<Instruction>();
+		//instructions = new ArrayList<Instruction>();
+		
+		ParserFileTXT parser = new ParserFileTXT();
+		try {
+			instructions = (ArrayList<Instruction>) parser.loadFile();
+			System.out.println("--#Loaded " + instructions.size() + " Instructions from file");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Can't load Instructions - Damn");
+		}
+		
 		System.out.println("Memory initialized\n--Instruction range protection: Done\n--Data segment: Done");
 	}
 	

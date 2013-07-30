@@ -17,14 +17,14 @@ public final class Util {
 	public static final int LEFT	=	1;
 	
 	
-	public static final String FILEREADER	=	"inputFile";
+	public static final String FILEREADER	=	"./input_files/inputfile";
 	
 	/*
 	 * Instructions type
 	 * */
 	public static final int OPCODE_ITYPE	=	0x00000000;
-	public static final int OPCODE_JTYPE	=	0x00000000;
-	public static final int OPCODE_RTYPE	=	0x00000000;
+	public static final int OPCODE_JTYPE	=	0x00000020;
+	public static final int OPCODE_RTYPE	=	0x00000002;
 	/*
 	 * Instructions
 	 * */
