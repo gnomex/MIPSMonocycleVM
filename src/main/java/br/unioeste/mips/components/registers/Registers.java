@@ -101,5 +101,12 @@ public class Registers {
 			//logger.error("Error: " + e.getMessage());	//Logger the error	
 		}	
 	}
+
+
+	public void setRegWrite(Boolean regWrite) {
+		this.regWrite = regWrite;
+	}
+	
+	
 	
 }

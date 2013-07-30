@@ -13,16 +13,13 @@ public class ALU {
 	private Integer rawInput2	=	ZERO;
 	private Integer result	=	ZERO;
 
+	private Integer ulaOperation = ADD;	//Default, by randon :P
+	
 	private Boolean zeroFlag= new Boolean(false);	//Default 
 
 	//private Logger logger = Logger.getLogger(Registers.class);
-	
-	public ALU()	{
-		//logger.setLevel(Level.DEBUG);
-	//	logger.info("Initializing Regs base");
-	}
-	
-	public void execute(Integer ulaOperation){
+		
+	public void execute(){
 
 		//logger.debug("ULA receive: " + ulaOperation );
 		
@@ -78,4 +75,8 @@ public class ALU {
 		return zeroFlag;
 	}
 
+	public void setOperation(Integer aluOperation) {
+		this.ulaOperation = aluOperation;
+	}
+	
 }

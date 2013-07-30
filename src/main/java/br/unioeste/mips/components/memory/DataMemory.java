@@ -96,4 +96,14 @@ public class DataMemory {
 		}
 	}
 
+	public void setMEMWRITE(Boolean mEMWRITE) {
+		MEMWRITE = mEMWRITE;
+	}
+
+	public void setMEMREAD(Boolean mEMREAD) {
+		MEMREAD = mEMREAD;
+	}
+
+	
+	
 }

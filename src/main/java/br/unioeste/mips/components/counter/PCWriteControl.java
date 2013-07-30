@@ -2,11 +2,11 @@ package br.unioeste.mips.components.counter;
 
 public class PCWriteControl {
 	
-	private Boolean ALUZEROFLAG = Boolean.FALSE;
 	private Integer PCWRITECOND;
+	private Integer PCWRITE;
 	
 	private Boolean ALUANDPCWRITECOND = Boolean.FALSE;
-	private Integer PCWRITE;
+	private Boolean ALUZEROFLAG = Boolean.FALSE;
 	
 	public Boolean getPCWriteFlag()	{
 		

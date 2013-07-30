@@ -16,7 +16,6 @@ public class BitDecoder {
 	
 	/**
 	 * Logic to turnon a specific bit
-	 * 00111100000100000000000000000101
 	 * */
 	private static Integer setbit(int whichBit, int rawCode)	{
 		
@@ -40,7 +39,6 @@ public class BitDecoder {
 			}
 			decounter--;
 		}
-		System.out.println("  #" + Integer.toBinaryString(raw));
 		return raw;
 	}
 	/**
@@ -69,6 +67,12 @@ public class BitDecoder {
 		return result;
 	}
 	
+	public int merge(int rawHith, int rawlow)	{
+		
+		return (rawHith | rawlow);
+		
+	}
+	
 	/*
 	 * Turn on the range first bits
 	 * */
@@ -76,7 +80,7 @@ public class BitDecoder {
 		
 		int result	=	ZERO;
 		
-		for (int i = 0; i <= range; i++) {
+		for (int i = 0; i < range; i++) {
 			result	=	setbit(i, result);
 		}
 		return result;

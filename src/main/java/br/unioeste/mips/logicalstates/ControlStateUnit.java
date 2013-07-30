@@ -3,6 +3,7 @@ package br.unioeste.mips.logicalstates;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.unioeste.mips.components.ControlUnit;
 import br.unioeste.mips.components.Datapath;
 import br.unioeste.mips.logicalstates.abstraction.InstructionDecodeState1;
 import br.unioeste.mips.logicalstates.abstraction.InstructionFetchState0;
@@ -16,7 +17,14 @@ public class ControlStateUnit {
 
 	private Datapath mipsDatapath;	//MIPS Multicycle datapath
 	
-	private List<Command> commands = new ArrayList<Command>();
+	private ControlUnit controlUnit;
+	
+	private ArrayList<Command> commands = new ArrayList<Command>();
+	
+	public ControlStateUnit() {
+		mipsDatapath = new Datapath();
+		controlUnit = new ControlUnit();
+	}
 	
 	private void whoIsNext()	{
 		
@@ -26,7 +34,7 @@ public class ControlStateUnit {
 	 * Example
 	 * */
 	private void lol()	{
-		commands.add(new InstructionFetchState0(mipsDatapath));
+		commands.add(new InstructionFetchState0(mipsDatapath, controlUnit));
 		commands.add(new InstructionDecodeState1(mipsDatapath));		
 	}
 	
@@ -36,6 +44,9 @@ public class ControlStateUnit {
 				cm.performs();
 				
 			}
+			
+			commands.clear();
+			
 		}catch (Exception e)	{
 			e.printStackTrace();
 		}
