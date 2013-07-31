@@ -32,6 +32,8 @@ public class InstructionFetchState0 implements Command{
 		
 		dataPath.setControlUnit(controlUnit);
 		dataPath.notifyFlafs();
+		
+		
 	}
 
 	

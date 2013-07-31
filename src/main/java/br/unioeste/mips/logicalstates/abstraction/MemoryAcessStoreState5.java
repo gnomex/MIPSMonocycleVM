@@ -12,8 +12,6 @@ public class MemoryAcessStoreState5  implements Command{
 	}
 	
 	public void performs() {
-		dataPath.setMEMWRITE(Boolean.TRUE );
-		dataPath.setSelectIORD(new Integer(1));
 	}
 
 }

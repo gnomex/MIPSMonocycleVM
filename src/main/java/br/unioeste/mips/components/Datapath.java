@@ -17,7 +17,6 @@ import br.unioeste.mips.components.registers.Register;
 import br.unioeste.mips.components.registers.Registers;
 import br.unioeste.mips.components.ula.ALU;
 import br.unioeste.mips.components.ula.ALUControlUnit;
-import br.unioeste.mips.dump.DumpListener;
 import static br.unioeste.mips.util.Util.PC_OFFSET;
 import static br.unioeste.mips.util.Util.LEFT;
 
@@ -31,7 +30,7 @@ public class Datapath implements Cloneable{
 	private ALUControlUnit aluControl	=	null;
 	//
 	private ControlUnit controlUnit	=	null;
-	
+
 	private ProgramCounter pc	=	null;
 	private PCWriteControl pcwriteControl = null;
 	private DataMemory memory	=	null;
@@ -68,7 +67,7 @@ public class Datapath implements Cloneable{
 
 		ula = new ALU();
 		aluControl = new ALUControlUnit();
-		
+
 		pcwriteControl = new PCWriteControl();
 		pc = new ProgramCounter();
 		memory = new DataMemory();
@@ -128,7 +127,7 @@ public class Datapath implements Cloneable{
 	protected void setPCWRITE(Integer flagPCWIRTE)	{
 		pcwriteControl.setPCWRITE(flagPCWIRTE);
 	}
-	
+
 	protected void setPCWRITECOND(Integer flagPCWRITECOND)	{
 		pcwriteControl.setPCWRITECOND(flagPCWRITECOND);
 	}
@@ -156,18 +155,18 @@ public class Datapath implements Cloneable{
 		this.setSelectALUSRCA(controlUnit.getALUSRCA());
 		this.setSelectALUSRCB(controlUnit.getALUSRCB());
 		this.setSelectPCSOURCE(controlUnit.getPCSOURCE());
-		
+
 		this.setIRWRITE(controlUnit.getIRWRITE());
 		this.setPCWRITE(controlUnit.getPCWRITE());
 		this.setPCWRITECOND(controlUnit.getPCWRITECOND());
 		this.ALUZeroToPcWriteControl();
-		
+
 		this.setMEMREAD(controlUnit.getMEMREAD());
 		this.setMEMWRITE(controlUnit.getMEMWRITE());
-		
+
 		this.setREGWRITE(controlUnit.getREGWRITE());
 	}
-	
+
 
 	/*
 	 * All ways
@@ -327,21 +326,21 @@ public class Datapath implements Cloneable{
 		pc.incrasePC(PCSOURCE.getData());
 
 	}
-	
+
 	public void InstructionRegisterJumpAddressToPcSource()	{
 
 		Integer j250 = instructionRegister.get250();
 
 		Shifter.shift(j250, 2, LEFT);
-		
+
 		BitDecoder decoder = new BitDecoder();
 		/*
 		 * Merge higth pc bits with jump address
 		 * */
 		int hightbits = decoder.getRangeBits(pc.getPC(), 28, 31);
-		
+
 		Integer jadrress = new Integer(decoder.merge(hightbits, j250));
-		
+
 		PCSOURCE.setCurrentDataPortC(jadrress);
 
 	}
@@ -367,7 +366,20 @@ public class Datapath implements Cloneable{
 	public void setControlUnit(ControlUnit current)	{
 		this.controlUnit = current;
 	}
-	
+
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+
+		try {
+
+			return super.clone();
+
+		} catch (CloneNotSupportedException cnse) {
+			throw new CloneNotSupportedException("- ERROR - Impossible make a clone");
+		}
+	}
+
+
 	/*	Invoker
 	 * ========================================================================
 	 * */

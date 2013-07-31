@@ -12,9 +12,7 @@ public class WriteBackState4  implements Command{
 	}
 	
 	public void performs() {
-		dataPath.setSelectREGDST(new Integer(0));
-		dataPath.setREGWRITE(Boolean.TRUE);
-		dataPath.setSelectMEMTOREG(new Integer(0));
+
 	}
 
 }

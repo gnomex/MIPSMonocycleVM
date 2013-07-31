@@ -35,7 +35,6 @@ public class ControlStateUnit {
 	 * */
 	private void lol()	{
 		commands.add(new InstructionFetchState0(mipsDatapath, controlUnit));
-		commands.add(new InstructionDecodeState1(mipsDatapath));		
 	}
 	
 	private void execute()	{
@@ -51,4 +50,5 @@ public class ControlStateUnit {
 			e.printStackTrace();
 		}
 	}
+	
 }

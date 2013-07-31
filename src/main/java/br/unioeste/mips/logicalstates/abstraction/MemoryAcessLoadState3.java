@@ -12,8 +12,7 @@ public class MemoryAcessLoadState3  implements Command{
 	}
 	
 	public void performs() {
-		dataPath.setMEMREAD(Boolean.TRUE);
-		dataPath.setSelectIORD(new Integer(1));
+
 	}
 	
 

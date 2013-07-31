@@ -13,10 +13,7 @@ public class InstructionDecodeState1 implements Command{
 	
 	
 	public void performs() {
-		dataPath.setSelectALUSRCA(new Integer(0));
-		dataPath.setSelectALUSRCB(new Integer(3));
-		dataPath.setALUOP(new Integer(0));
-		
+
 	}
 
 }
