@@ -104,6 +104,13 @@ public class DataMemory {
 		MEMREAD = mEMREAD;
 	}
 
+	public Boolean haveInstructions()	{
+		/**
+		 * @TODO Stuff here
+		 * returns true if have a some next instruction 
+		 * */
+		return Boolean.TRUE;
+	}
 	
 	
 }

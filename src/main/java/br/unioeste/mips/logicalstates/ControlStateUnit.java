@@ -33,6 +33,18 @@ public class ControlStateUnit {
 		controlUnit = new ControlUnit();
 	}
 
+	public void startVM()	{
+		
+		/**
+		 * 
+		 * */
+		
+		while (mipsDatapath.getMemorySnapshot().haveInstructions()) {
+			this.whoIsNext();
+		}
+		
+	}
+	
 	private void whoIsNext()	{
 
 		ArrayList<Command> commands = new ArrayList<Command>();

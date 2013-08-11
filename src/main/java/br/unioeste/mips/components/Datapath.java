@@ -367,6 +367,10 @@ public class Datapath implements Cloneable{
 		this.controlUnit = current;
 	}
 
+	/*
+	 * ===============================================#########################
+	 * */
+	
 	@Override
 	public Object clone() throws CloneNotSupportedException {
 
@@ -379,6 +383,9 @@ public class Datapath implements Cloneable{
 		}
 	}
 
+	public DataMemory getMemorySnapshot()	{
+		return this.memory;
+	}
 
 	/*	Invoker
 	 * ========================================================================
