@@ -25,3 +25,9 @@ Suported instructions
 		<li>j</li>
 	</ul>
 </p>
+
+Go!
+===
+	Clone projetc
+	Update maven dependences
+	Run ControlStateUnit.java

@@ -25,7 +25,6 @@ public class ControlUnit {
 	private Boolean REGWRITE	=	Boolean.TRUE;
 	private Integer REGDST	=	ZERO;
 
-
 	/*
 	 * Alter flags to default value
 	 * */
@@ -182,7 +181,9 @@ public class ControlUnit {
 		OPCODE = oPCODE;
 	}
 
-
+	public Integer getOPCODE()	{
+		return this.OPCODE;
+	}
 	
 
 }
