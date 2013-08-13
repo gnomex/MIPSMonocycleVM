@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import br.unioeste.mips.common.bit.BitDecoder;
 import br.unioeste.mips.common.exception.IncrasePCOverflow;
 import br.unioeste.mips.common.exception.MUXSelectionOutOfBounds;
+import br.unioeste.mips.common.exception.PCWritePermissionDenied;
 import br.unioeste.mips.common.mux.Mux2LogicalGates;
 import br.unioeste.mips.common.mux.Mux4LogicalGates;
 import br.unioeste.mips.common.shift.Shifter;
@@ -149,6 +150,9 @@ public class Datapath implements Cloneable{
 	}
 
 	public void notifyFlafs()	{
+		
+		controlUnit.makeSnapshot();
+		
 		this.setSelectIORD(controlUnit.getIORD());
 		this.setSelectREGDST(controlUnit.getREGDST());
 		this.setSelectMEMTOREG(controlUnit.getMEMTOREG());
@@ -194,115 +198,125 @@ public class Datapath implements Cloneable{
 		this.ALUToPCSource();
 		
 	}
-
+	
+	public void setRegisters() throws MUXSelectionOutOfBounds	{
+		
+		this.InstructionRegisterR2521ToRSRegister();
+		this.InstructionRegisterR2016ToRTRegister();
+		this.InstructionRegisterR2016ToREGDST();
+		this.InstructionRegisterR1511ToREGDST();
+		this.REGDSTToRDRegister();
+		this.InstructionRegisterR150ToALUSRCB();
+		this.InstructionRegisterR150SHIFTERToALUSRCB();
+		
+	}
+	
 	/*
 	 * All ways
 	 * ========================================================================
 	 * */
 	public void PcToIORD(){
-
+		System.out.println(">Moving pc to IORD");
 		IORD.setCurrentDataPortA(pc.getPC());
 
 	}
 	public void PcToALUSRCA()	{
-
+		System.out.println(">Moving pc to ALUSRCA");
 		ALUSRCA.setCurrentDataPortA(pc.getPC());
 
 	}
 	public void ALUOUTToIORD()	{
-
+		System.out.println(">Moving ALUOUT to IORD");
 		IORD.setCurrentDataPortB(ALUOUT.getRawValue());
 
 	}
 	public void IorDToMemory() throws MUXSelectionOutOfBounds{
-
+		System.out.println(">Moving IORD to Memory");
 		memory.setAdrress(IORD.getData());
 
 	}
 	public void MemoryToMemoryDataRegister() throws Exception{
-
+		System.out.println(">Moving Memory to MemoryDataRegister");
 		memoryDataRegister.setValue(memory.getData());
 
 	}
 	public void MemoryToInstructionRegister() throws Exception{
-
+		System.out.println(">Moving Memory to InstructionRegister");
 		instructionRegister.setInstruction(memory.getInstruction());
-
-		instructionRegister.transcodeInstruction();
 
 	}
 	public void InstructionRegisterR3126ToControlUnit(){
-
+		System.out.println(">Moving opcode to ControlUnit");
 		controlUnit.setOPCODE(instructionRegister.getR3126());
 
 	}
 	public void InstructionRegisterR2521ToRSRegister(){
-
-		registers.setRS(instructionRegister.getR2521());
+		System.out.println(">Moving InstructionRegister [25-21] to RS");
+		registers.setRS(instructionRegister.getR2520());
 
 	}
 	public void InstructionRegisterR2016ToRTRegister(){
-
-		registers.setRT(instructionRegister.getR2016());
+		System.out.println(">Moving InstructionRegister [20-16] to RT");
+		registers.setRT(instructionRegister.getR2015());
 
 	}
 	public void InstructionRegisterR2016ToREGDST(){
-
-		REGDST.setCurrentDataPortA(instructionRegister.getR2016());;
+		System.out.println(">Moving InstructionRegister [20-16] to REGDST");
+		REGDST.setCurrentDataPortA(instructionRegister.getR2015());;
 
 	}
-	public void InstructionRegisterR150ToREGDST(){
-
-		REGDST.setCurrentDataPortB(instructionRegister.getR150());
+	public void InstructionRegisterR1511ToREGDST(){
+		System.out.println(">Moving InstructionRegister [15-11] to REGDST");
+		REGDST.setCurrentDataPortB(instructionRegister.getR1511());
 
 	}
 	public void REGDSTToRDRegister() throws MUXSelectionOutOfBounds{
-
+		System.out.println(">Moving REGDST to RD");
 		registers.setRD(REGDST.getData());
 
 	}
 	public void MEMTOREGToWriteDataRegister() throws MUXSelectionOutOfBounds{
-
+		System.out.println(">Moving MEMTOREG to WriteDataRegister");
 		registers.setWriteData(MEMTOREG.getData());
 
 	}
 	public void MemoryDataRegisterToMEMTOREG(){
-
+		System.out.println(">Moving MemoryDataRegister to MEMTOREG");
 		MEMTOREG.setCurrentDataPortB(memoryDataRegister.getValue());
 
 	}
 	public void ALUOUTToMEMTOREG(){
-
+		System.out.println(">Moving ALUOUT to MEMTOREG");
 		MEMTOREG.setCurrentDataPortA(ALUOUT.getRawValue());
 
 	}
 	public void ALUOUTToPCSource()	{
-
+		System.out.println(">Moving ALUOUT To PCSOURCE");
 		PCSOURCE.setCurrentDataPortB(ALUOUT.getRawValue());
 
 	}
 	public void RegisterReadData1ToA(){
-
+		System.out.println("Datapath.RegisterReadData1ToA");
 		A.setTemporaryValue(registers.getALUOp1());
 
 	}
 	public void RegisterReadData1ToB(){
-
+		System.out.println("Datapath.RegisterReadData1ToB");
 		B.setTemporaryValue(registers.getALUOp2());
 
 	}
 	public void AToALUSRCA()	{
-
+		System.out.println("Datapath.AToALUSRCA()");
 		ALUSRCA.setCurrentDataPortB(A.getRawValue());
 
 	}
 	public void BToALUSRCB(){
-
+		System.out.println("Datapath.BToALUSRCB()");
 		ALUSRCB.setCurrentDataPortA(B.getRawValue());
 
 	}
 	public void BToMemoryWriteData() {
-
+		System.out.println("Datapath.BToMemoryWriteData()");
 		try {
 			memory.push(B.getRawValue());
 		} catch (Exception e) {
@@ -313,53 +327,55 @@ public class Datapath implements Cloneable{
 
 	}
 	public void InstructionRegisterR150ToALUSRCB()	{
-
+		System.out.println("Datapath.InstructionRegisterR150ToALUSRCB()");
 		ALUSRCB.setCurrentDataPortC(instructionRegister.getR150());
 
 	}
 	public void InstructionRegisterR150SHIFTERToALUSRCB()	{
-
+		System.out.println("Datapath.InstructionRegisterR150SHIFTERToALUSRCB()");
 		Integer toshift = instructionRegister.getR150();
 		Shifter.shift(toshift, 2, LEFT);
 
 	}
 	public void ALUSRCAToAlu() throws MUXSelectionOutOfBounds	{
-
+		System.out.println("Datapath.ALUSRCAToAlu()");
 		ula.setRawInput1(ALUSRCA.getData());
 
 	}
 	public void ALUSRCBToAlu() throws MUXSelectionOutOfBounds	{
-
+		System.out.println("Datapath.ALUSRCBToAlu()");
 		ula.setRawInput2(ALUSRCB.getData());
 
 	}
 	public void ALUToALUOUT()	{
-
+		System.out.println("Datapath.ALUToALUOUT()");
 		ALUOUT.setTemporaryValue(ula.getResult());
 
 	}
 	public void ALUToPCSource()	{
-
+		System.out.println("Datapath.ALUToPCSource()");
 		PCSOURCE.setCurrentDataPortA(ula.getResult());
 
 	}
 	public void ALUZeroToPcWriteControl()	{
-
+		System.out.println("Datapath.ALUZeroToPcWriteControl()");
 		pcwriteControl.setALUZEROFLAG(ula.isActiveZeroFlag());
 
 	}
 	public void ALUCONTROLToULA()	{
-		
+		System.out.println("Datapath.ALUCONTROLToULA()");
+		System.out.println("Not Implemented Yet!!!");
 	}
 	
-	public void PcSourceToPC() throws IncrasePCOverflow, MUXSelectionOutOfBounds	{
-
+	public void PcSourceToPC() throws IncrasePCOverflow, MUXSelectionOutOfBounds, PCWritePermissionDenied	{
+		System.out.println("Datapath.PcSourceToPC()");
 		pc.incrasePC(PCSOURCE.getData());
 
 	}
 
 	public void InstructionRegisterJumpAddressToPcSource()	{
-
+		System.out
+				.println("Datapath.InstructionRegisterJumpAddressToPcSource()");
 		Integer j250 = instructionRegister.get250();
 
 		Shifter.shift(j250, 2, LEFT);
@@ -385,7 +401,9 @@ public class Datapath implements Cloneable{
 	 * */
 
 	public void setALUOP(Integer aluop){
-
+		
+		System.out.println("Datapath.setALUOP()");
+		
 		aluControl.setALUOPFALG(aluop);
 		aluControl.decode();
 		/**
@@ -418,7 +436,7 @@ public class Datapath implements Cloneable{
 		return this.memory;
 	}
 
-	/*	Invoker
+	/*	Invoker - Test Only
 	 * ========================================================================
 	 * */
 	public static void main(String[] args) {

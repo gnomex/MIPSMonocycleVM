@@ -1,42 +1,38 @@
 package br.unioeste.mips.components.instructions;
 
+import br.unioeste.mips.common.bit.BitDecoder;
 import br.unioeste.mips.common.instruction.Instruction;
-import br.unioeste.mips.components.registers.Register;
 
 public class InstructionRegister {
 
-	private Integer r3126;	//rs
-	private Integer r2521;	//rt
-	private Integer r2016;	//rd
-	private Integer r150;	//Shamt, funct, imm
 	private Instruction instruction;
 	
-	private Boolean IRWRITE;
+	private Boolean IRWRITE = Boolean.TRUE;	//Default Value
 	
-	public void setInstruction(Instruction currentInstruction)	{
-		this.instruction = currentInstruction;
-	}
+	private BitDecoder decoder = new BitDecoder();
 	
-	public void transcodeInstruction(){
-		
-		System.out.println("Nothing implemented yet!!!\n\nSEE Instruction Register");
-		
+	public void setInstruction(Instruction currentInstruction) throws Exception	{
+		if (IRWRITE)	{
+			this.instruction = currentInstruction;
+		} else	{
+			throw new Exception("You can't assign this instruction, the IRWRITE Flag is " + IRWRITE);
+		}
 	}
 
 	public Integer getR3126() {
-		return r3126;
+		return instruction.getOpcode();
 	}
 
-	public Integer getR2521() {
-		return r2521;
+	public Integer getR2520() {
+		return decoder.getRangeBits(instruction.getRawinstruction(), 20, 25);
 	}
 
-	public Integer getR2016() {
-		return r2016;
+	public Integer getR2015() {
+		return decoder.getRangeBits(instruction.getRawinstruction(), 15, 20);
 	}
 
 	public Integer getR150() {
-		return r150;
+		return decoder.getRangeBits(instruction.getRawinstruction(), 0, 15);
 	}
 
 	public Instruction getInstruction() {
@@ -50,13 +46,15 @@ public class InstructionRegister {
 	}
 
 	public Integer get250() {
-		// TODO Auto-generated method stub
-		return null;
+		return decoder.getRangeBits(instruction.getRawinstruction(), 0, 25);
 	}
 
 	public Integer get50() {
-		// TODO Auto-generated method stub
-		return null;
+		return decoder.getRangeBits(instruction.getRawinstruction(), 0, 5);
+	}
+
+	public Integer getR1511() {
+		return decoder.getRangeBits(instruction.getRawinstruction(), 15, 10);
 	}
 	
 	

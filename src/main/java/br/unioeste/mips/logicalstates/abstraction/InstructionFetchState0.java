@@ -1,6 +1,5 @@
 package br.unioeste.mips.logicalstates.abstraction;
 
-import br.unioeste.mips.common.exception.MUXSelectionOutOfBounds;
 import br.unioeste.mips.components.ControlUnit;
 import br.unioeste.mips.components.Datapath;
 import br.unioeste.mips.logicalstates.Command;
@@ -23,7 +22,7 @@ public class InstructionFetchState0 implements Command{
 	
 	public void performs() {
 		
-		System.out.println("\n\n InstructionFetchState0.performs():\n");
+		System.out.println("\n\n~> InstructionFetchState0.performs():\n");
 		
 		controlUnit.setMEMTOREG(new Integer(1));
 		controlUnit.setALUSRCA(new Integer(0));
@@ -38,19 +37,15 @@ public class InstructionFetchState0 implements Command{
 		
 		try {
 			dataPath.loadInstructionByAtualPC();
+			
+			dataPath.PcToALUSRCA();
+			
+			dataPath.increasePC();
+			
 		} catch (Exception e) {
 			System.out.println("\n## => On State 0 - Some Errors:\n");
 			e.printStackTrace();
 			System.out.println("########## END OF STACK TRACE ON STATE 0 ##########\n");	
-		}
-		
-		dataPath.PcToALUSRCA();
-		try {
-			dataPath.increasePC();
-		} catch (MUXSelectionOutOfBounds e) {
-			System.out.println("\n## => On State 0 - Some Errors:\n");
-			e.printStackTrace();
-			System.out.println("########## END OF STACK TRACE ON STATE 0 ##########\n");
 		}
 		
 		System.out.println("########## END OF STATE 0 ##########\n");	

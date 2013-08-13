@@ -23,7 +23,7 @@ public class DataMemory {
 	public DataMemory()	{
 		datamemory = new ArrayList<Integer>();
 		//instructions = new ArrayList<Instruction>();
-		
+
 		ParserFileTXT parser = new ParserFileTXT();
 		try {
 			instructions = (ArrayList<Instruction>) parser.loadFile();
@@ -33,67 +33,50 @@ public class DataMemory {
 			e.printStackTrace();
 			System.out.println("Can't load Instructions - Damn");
 		}
-		
+
 		System.out.println("Memory initialized\n--Instruction range protection: Done\n--Data segment: Done");
 	}
-	
-	
+
+
 	public Instruction getInstruction()	throws Exception{
 
-		try {
+		System.out.println(" -- Get a instruction, at index: " + addressIndex);
 
-			if	(MEMWRITE)	{
-				return instructions.get(this.addressIndex);
-			} else	{
-				throw new MemoryPermissionDenied("Flag MEMREAD is not active!");
-			}
+		if	(MEMREAD)	{
+			return instructions.get(this.addressIndex);
+		} else	{
+			throw new MemoryPermissionDenied("Flag MEMREAD is not active!");
+		}
 
-		} catch (Exception e) {
-			throw new ArrayIndexOutOfBoundsException();
-		}	
 	}
 
 	public Integer getData()	throws Exception{
+		
+		System.out.println(" -- Get a data, at index: " + addressIndex);
 
-		try {
+		if	(MEMREAD)	{
+			return datamemory.get(this.addressIndex);
+		} else	{
+			throw new MemoryPermissionDenied("Flag MEMREAD is not active!");
+		}
 
-			if	(MEMWRITE)	{
-				return datamemory.get(this.addressIndex);
-			} else	{
-				throw new MemoryPermissionDenied("Flag MEMREAD is not active!");
-			}
-
-		} catch (Exception e) {
-			throw new ArrayIndexOutOfBoundsException();
-		}	
 	}
 
 	public void push(Instruction element)	throws Exception{
 
-		try {
-
-			if	(MEMREAD)	{
-				instructions.add(this.addressIndex, element);
-			} else	{
-				throw new MemoryPermissionDenied("Flag MEMWRITE is not active!");
-			}
-
-		} catch (Exception e) {
-			throw new ArrayIndexOutOfBoundsException(this.addressIndex);
+		if	(MEMWRITE)	{
+			instructions.add(this.addressIndex, element);
+		} else	{
+			throw new MemoryPermissionDenied("Flag MEMWRITE is not active!");
 		}
-
 	}
 	public void push(Integer element)	throws Exception{
-		try {
-			if	(MEMREAD)	{
-				datamemory.add(this.addressIndex, element);
-			} else	{
-				throw new MemoryPermissionDenied("Flag MEMWRITE is not active!");
-			}
-
-		} catch (Exception e) {
-			throw new ArrayIndexOutOfBoundsException(this.addressIndex);
+		if	(MEMWRITE)	{
+			datamemory.add(this.addressIndex, element);
+		} else	{
+			throw new MemoryPermissionDenied("Flag MEMWRITE is not active!");
 		}
+
 	}
 
 	public void setMEMWRITE(Boolean mEMWRITE) {
@@ -106,11 +89,11 @@ public class DataMemory {
 
 	public Boolean haveInstructions()	{
 		/**
-		 * @TODO Stuff here
-		 * returns true if have a some next instruction 
+		 * @WARNING: Not tested Yet!!! Maybe work.
 		 * */
-		return Boolean.TRUE;
+		if (addressIndex <= instructions.size())	return Boolean.TRUE;
+		return Boolean.FALSE;
 	}
-	
-	
+
+
 }

@@ -23,6 +23,13 @@ public class InstructionDecoder {
 
 		Integer opcode = decoder.getRangeBits(raw, 25, 31);
 		
+		Instruction inst = new Instruction();
+		inst.setOpcode(opcode);
+		inst.setRawinstruction(decoder.getRangeBits(raw, 0, 31));
+		
+		return inst;
+		
+		/*
 		try {
 			
 			switch (opcode) {
@@ -60,7 +67,7 @@ public class InstructionDecoder {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		return null;
+		return null;*/
 	}
 
 }

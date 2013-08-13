@@ -5,11 +5,13 @@ package br.unioeste.mips.common.instruction;
  * 
  * */
 
-public abstract class Instruction	{
+public class Instruction	{
 	
 	private Integer opcode;
 	
 	private String typeName;
+	
+	private Integer rawinstruction;
 
 	public Integer getOpcode() {
 		return opcode;
@@ -25,6 +27,14 @@ public abstract class Instruction	{
 
 	public void setTypeName(String typeName) {
 		this.typeName = typeName;
+	}
+
+	public Integer getRawinstruction() {
+		return rawinstruction;
+	}
+
+	public void setRawinstruction(Integer rawinstruction) {
+		this.rawinstruction = rawinstruction;
 	}
 	
 }

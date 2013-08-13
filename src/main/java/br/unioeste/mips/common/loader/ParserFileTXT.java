@@ -28,8 +28,6 @@ public class ParserFileTXT {
 
 	public List<Instruction> loadFile() throws Exception	{
 
-		//logger.setLevel(Level.INFO);
-		//logger.info("Initializing txt parser");
 
 		filereader	=	new BufferedReader(new FileReader(FILEREADER + ".txt"));
 

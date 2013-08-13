@@ -46,7 +46,25 @@ public class ControlUnit {
 
 	}
 
-
+	public void makeSnapshot()	{
+		System.out.println("### Control Unit Snapshot:");
+		System.out.println("  >PCWRITECOND: " + PCWRITECOND);
+		System.out.println("  >PCWRITE: " + PCWRITE);
+		System.out.println("  >IORD: " + IORD);
+		System.out.println("  >MEMREAD: " + MEMREAD);
+		System.out.println("  >MEMWRITE: " + MEMWRITE);
+		System.out.println("  >MEMTOREG: " + MEMTOREG);
+		System.out.println("  >IRWIRTE: " + IRWRITE);
+		System.out.println("  >PCSOURCE: " + PCSOURCE);
+		System.out.println("  >ALUOP: " + ALUOP);
+		System.out.println("  >ALUSRCA: " + ALUSRCA);
+		System.out.println("  >ALUSRCB: " + ALUSRCB);
+		System.out.println("  >REGWRITE: " + REGWRITE);
+		System.out.println("  >REGDST: " + REGDST);
+		System.out.println("### END OF Snapshot ###\n");
+		
+	}
+	
 	public Integer getPCWRITECOND() {
 		return PCWRITECOND;
 	}

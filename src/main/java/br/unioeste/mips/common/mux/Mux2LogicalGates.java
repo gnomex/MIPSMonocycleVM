@@ -44,6 +44,4 @@ public class Mux2LogicalGates {
 		this.currentDataPortB = currentDataPortB;
 	}
 
-
-
 }

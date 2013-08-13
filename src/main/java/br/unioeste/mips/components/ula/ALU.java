@@ -20,7 +20,8 @@ public class ALU {
 	//private Logger logger = Logger.getLogger(Registers.class);
 		
 	public void execute(){
-
+		System.out.println("ALU.execute()");
+		System.out.println(" >>");
 		//logger.debug("ULA receive: " + ulaOperation );
 		
 		this.zeroFlag = Boolean.FALSE;	//Force false

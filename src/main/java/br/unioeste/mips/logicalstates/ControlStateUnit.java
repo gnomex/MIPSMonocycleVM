@@ -39,10 +39,11 @@ public class ControlStateUnit {
 		/**
 		 * 
 		 * */
-		
+		/*
 		while (mipsDatapath.getMemorySnapshot().haveInstructions()) {
 			this.whoIsNext();
-		}
+		}*/
+		this.whoIsNext();
 		
 	}
 	
@@ -55,7 +56,9 @@ public class ControlStateUnit {
 		 * */
 		commands.add(new InstructionFetchState0(mipsDatapath, controlUnit));
 		commands.add(new InstructionDecodeState1(mipsDatapath, controlUnit));
-
+		
+		this.execute(commands);
+/*
 		switch (controlUnit.getOPCODE()) {
 		case OPCODE_RTYPE:
 			commands.add(new ExecutionState6(mipsDatapath, controlUnit));
@@ -100,7 +103,7 @@ public class ControlStateUnit {
 			throw new Exception("-- Error, no have a state to execute!!!");
 			break;
 		}
-
+*/
 	}
 
 	private void execute(ArrayList<Command> commands)	{
@@ -124,9 +127,11 @@ public class ControlStateUnit {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					//Try new instance datapath
-					ControlStateUnit StateVM;
 
+					ControlStateUnit stateVm = new ControlStateUnit();
+
+					stateVm.startVM();
+					
 					System.out.println("Work!");
 
 				} catch (Exception e) {

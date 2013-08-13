@@ -51,18 +51,23 @@ public class Registers {
 	
 	
 	public void setRS(Integer rS) {
+		System.out.println("Registers.setRS");
 		RS = rS;
 	}
 
 	public void setRD(Integer rD) {
+		System.out.println("Registers.setRD");
 		RD = rD;
 	}
 
 	public void setRT(Integer rT) {
+		System.out.println("Registers.setRT");
 		RT = rT;
 	}
 
 	public void setWriteData(Integer value)	{
+		
+		System.out.println("Registers.setWriteData, Value: " + value);
 		
 		Register reg = dataregisters.get(this.RD);
 		reg.setValue(value);
