@@ -19,6 +19,8 @@ public class InstructionRegister {
 	
 	public void transcodeInstruction(){
 		
+		System.out.println("Nothing implemented yet!!!\n\nSEE Instruction Register");
+		
 	}
 
 	public Integer getR3126() {
@@ -48,6 +50,11 @@ public class InstructionRegister {
 	}
 
 	public Integer get250() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Integer get50() {
 		// TODO Auto-generated method stub
 		return null;
 	}

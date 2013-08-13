@@ -14,6 +14,7 @@ import br.unioeste.mips.logicalstates.abstraction.JumpCompletionState9;
 import br.unioeste.mips.logicalstates.abstraction.MemoryAcessLoadState3;
 import br.unioeste.mips.logicalstates.abstraction.MemoryAcessStoreState5;
 import br.unioeste.mips.logicalstates.abstraction.MemoryAddressState2;
+import br.unioeste.mips.logicalstates.abstraction.MemoryLDIState12;
 import br.unioeste.mips.logicalstates.abstraction.RTypeCompletionState7;
 import static br.unioeste.mips.util.Util.*;
 
@@ -59,7 +60,7 @@ public class ControlStateUnit {
 		case OPCODE_RTYPE:
 			commands.add(new ExecutionState6(mipsDatapath, controlUnit));
 			commands.add(new RTypeCompletionState7(mipsDatapath, controlUnit));
-			this.execute();
+			this.execute(commands);
 			break;
 
 		case OPCODE_ITYPE:

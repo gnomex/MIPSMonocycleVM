@@ -4,19 +4,24 @@ import br.unioeste.mips.components.ControlUnit;
 import br.unioeste.mips.components.Datapath;
 import br.unioeste.mips.logicalstates.Command;
 
-public class ExecutionState6  implements Command{
+public class MemoryLDIState12 implements Command {
 
 	private Datapath dataPath;
 	
 	private ControlUnit controlUnit;
-
-	public ExecutionState6(Datapath datapath, ControlUnit controlUnit)	{
+	
+	public MemoryLDIState12(Datapath datapath, ControlUnit controlunit)	{
+		
 		this.dataPath = datapath;
-		this.controlUnit = controlUnit;
+		this.controlUnit = controlunit;
+		
 	}
 	
 	public void performs() {
+		// TODO Auto-generated method stub
 		
 	}
 
+	
+	
 }

@@ -167,6 +167,33 @@ public class Datapath implements Cloneable{
 		this.setREGWRITE(controlUnit.getREGWRITE());
 	}
 
+	/*
+	 * Shortcuts
+	 * */
+	/**
+	 * Load Instruction from atual PC
+	 * @throws Exception
+	 * */
+	public void loadInstructionByAtualPC() throws Exception	{
+		
+		this.PcToIORD();
+		this.IorDToMemory();
+		this.MemoryToInstructionRegister();
+	}
+
+	public void increasePC() throws MUXSelectionOutOfBounds	{
+		
+		this.ALUSRCAToAlu();
+		this.ALUSRCBToAlu();
+		
+		this.aluControl.setALUOPFALG(controlUnit.getALUOP());
+		this.aluControl.setRaw6bits(instructionRegister.get50()); //Funct
+		
+		this.ALUCONTROLToULA();
+		this.ALUEXECUTE();
+		this.ALUToPCSource();
+		
+	}
 
 	/*
 	 * All ways
@@ -321,6 +348,10 @@ public class Datapath implements Cloneable{
 		pcwriteControl.setALUZEROFLAG(ula.isActiveZeroFlag());
 
 	}
+	public void ALUCONTROLToULA()	{
+		
+	}
+	
 	public void PcSourceToPC() throws IncrasePCOverflow, MUXSelectionOutOfBounds	{
 
 		pc.incrasePC(PCSOURCE.getData());
