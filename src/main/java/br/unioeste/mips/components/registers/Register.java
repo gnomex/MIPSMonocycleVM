@@ -44,7 +44,12 @@ public class Register {
 		this.writePermission = writePermission;
 	}
 
-	
+	public void makeSnapshot()	{
+		System.out.println("-Reg Name: " + name);
+		System.out.println("-Reg Alias: " + alias);
+		System.out.println("- Reg Value: " + value);
+		System.out.println("- Reg Write Permission: " + writePermission);
+	}
 	
 	
 }

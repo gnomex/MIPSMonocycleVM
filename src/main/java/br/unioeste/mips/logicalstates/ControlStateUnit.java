@@ -56,7 +56,8 @@ public class ControlStateUnit {
 		 * */
 		commands.add(new InstructionFetchState0(mipsDatapath, controlUnit));
 		commands.add(new InstructionDecodeState1(mipsDatapath, controlUnit));
-		
+
+		//POG - Execute only 2 first states
 		this.execute(commands);
 /*
 		switch (controlUnit.getOPCODE()) {

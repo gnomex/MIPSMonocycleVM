@@ -159,7 +159,8 @@ public class Datapath implements Cloneable{
 		this.setSelectALUSRCA(controlUnit.getALUSRCA());
 		this.setSelectALUSRCB(controlUnit.getALUSRCB());
 		this.setSelectPCSOURCE(controlUnit.getPCSOURCE());
-
+		//POG
+		this.aluControl.setALUOPFALG(controlUnit.getALUOP());
 		this.setIRWRITE(controlUnit.getIRWRITE());
 		this.setPCWRITE(controlUnit.getPCWRITE());
 		this.setPCWRITECOND(controlUnit.getPCWRITECOND());
@@ -208,6 +209,8 @@ public class Datapath implements Cloneable{
 		this.REGDSTToRDRegister();
 		this.InstructionRegisterR150ToALUSRCB();
 		this.InstructionRegisterR150SHIFTERToALUSRCB();
+		
+		this.registers.makeSnapshot();
 		
 	}
 	
@@ -343,7 +346,7 @@ public class Datapath implements Cloneable{
 
 	}
 	public void ALUSRCBToAlu() throws MUXSelectionOutOfBounds	{
-		System.out.println("Datapath.ALUSRCBToAlu()");
+		System.out.println("Datapath.ALUSRCBToAlu");
 		ula.setRawInput2(ALUSRCB.getData());
 
 	}
@@ -364,7 +367,11 @@ public class Datapath implements Cloneable{
 	}
 	public void ALUCONTROLToULA()	{
 		System.out.println("Datapath.ALUCONTROLToULA()");
-		System.out.println("Not Implemented Yet!!!");
+		
+		this.aluControl.decode();
+		
+		this.ula.setOperation(this.aluControl.getALUOPERATION());
+		
 	}
 	
 	public void PcSourceToPC() throws IncrasePCOverflow, MUXSelectionOutOfBounds, PCWritePermissionDenied	{

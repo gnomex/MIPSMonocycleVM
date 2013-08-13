@@ -20,19 +20,26 @@ public class InstructionRegister {
 	}
 
 	public Integer getR3126() {
+		System.out.println(" >> Instruction OPCODE: " + instruction.getOpcode());
 		return instruction.getOpcode();
 	}
 
 	public Integer getR2520() {
-		return decoder.getRangeBits(instruction.getRawinstruction(), 20, 25);
+		Integer reg = decoder.getRangeBits(instruction.getRawinstruction(), 20, 25);
+		System.out.println(" >> Intruction [25-20] : " + reg);
+		return reg;
 	}
 
 	public Integer getR2015() {
-		return decoder.getRangeBits(instruction.getRawinstruction(), 15, 20);
+		Integer reg = decoder.getRangeBits(instruction.getRawinstruction(), 15, 20);
+		System.out.println(" >> Intruction [20-15] : " + reg);
+		return reg;
 	}
 
 	public Integer getR150() {
-		return decoder.getRangeBits(instruction.getRawinstruction(), 0, 15);
+		Integer reg = decoder.getRangeBits(instruction.getRawinstruction(), 0, 15);
+		System.out.println(" >> Intruction [15-0] : " + reg);
+		return reg; 
 	}
 
 	public Instruction getInstruction() {
@@ -46,15 +53,24 @@ public class InstructionRegister {
 	}
 
 	public Integer get250() {
-		return decoder.getRangeBits(instruction.getRawinstruction(), 0, 25);
+		
+		Integer reg = decoder.getRangeBits(instruction.getRawinstruction(), 0, 25);
+		System.out.println(" >> Intruction [25-0] : " + reg);
+		return reg;
 	}
 
 	public Integer get50() {
-		return decoder.getRangeBits(instruction.getRawinstruction(), 0, 5);
+		
+		Integer reg = decoder.getRangeBits(instruction.getRawinstruction(), 0, 5);
+		System.out.println(" >> Intruction [5-0] : " + reg);
+		return reg;
 	}
 
 	public Integer getR1511() {
-		return decoder.getRangeBits(instruction.getRawinstruction(), 15, 10);
+		
+		Integer reg = decoder.getRangeBits(instruction.getRawinstruction(), 15, 10);
+		System.out.println(" >> Intruction [15-10] : " + reg);
+		return reg;
 	}
 	
 	

@@ -34,6 +34,7 @@ public class InstructionFetchState0 implements Command{
 		
 		dataPath.setControlUnit(controlUnit);
 		dataPath.notifyFlafs();
+		//dataPath.ALUCONTROLToULA();
 		
 		try {
 			dataPath.loadInstructionByAtualPC();

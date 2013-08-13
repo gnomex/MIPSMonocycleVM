@@ -20,8 +20,7 @@ public class ALU {
 	//private Logger logger = Logger.getLogger(Registers.class);
 		
 	public void execute(){
-		System.out.println("ALU.execute()");
-		System.out.println(" >>");
+		System.out.println("  ~> ALU.execute");
 		//logger.debug("ULA receive: " + ulaOperation );
 		
 		this.zeroFlag = Boolean.FALSE;	//Force false
@@ -49,7 +48,9 @@ public class ALU {
 		//	logger.info("OR op");
 			break;
 		}		
-
+		
+		System.out.println("  --> Result is: " + result);
+		
 	}
 
 	private void verifyZeroFlag(Integer result)	{
@@ -58,13 +59,16 @@ public class ALU {
 			this.zeroFlag	=	Boolean.TRUE;
 		}
 		
+		System.out.println(" -- ALU Zero flag: " + zeroFlag);
 	}
 	
 	public void setRawInput1(Integer rawInput1) {
+		System.out.println("=>New Data input 1 on ULA, value: " + rawInput1);
 		this.rawInput1 = rawInput1;
 	}
 
 	public void setRawInput2(Integer rawInput2) {
+		System.out.println("=>New Data input 2 on ULA, value: " + rawInput2);
 		this.rawInput2 = rawInput2;
 	}
 

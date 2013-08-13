@@ -112,6 +112,16 @@ public class Registers {
 		this.regWrite = regWrite;
 	}
 	
-	
+	public void makeSnapshot()	{
+		
+		System.out.println(" ### Registers Snapshot ###");
+		for(Register reg : dataregisters)	{
+			reg.makeSnapshot();
+		}
+
+		System.out.println(" - Current\n  RS: " + RS + "\n  RT: " + RT + "\n  RD: " + RD + "\n  RegWrite: " + regWrite);
+		System.out.println("\n### End of registers snapshot");
+		
+	}
 	
 }

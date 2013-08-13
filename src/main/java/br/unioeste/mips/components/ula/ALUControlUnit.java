@@ -33,15 +33,41 @@ public class ALUControlUnit {
 	 * 
 	 * */
 	public void decode()	{
+		
+		System.out.println(" >Try decode opcode on ALU control unit");
+		
 		switch (ALUOPFLAG) {
-		case ADD:
+		case ZERO:
 			ALUOP = ADD;
 
 			break;
-		case SUB:
+		case 1:
 			ALUOP = SUB;
 
 			break;
+		case 2:
+			this.rtype();
+			break;
+			
+		default:
+			break;
+		}
+		
+		System.out.println(" >> Ok: operation is: " + ALUOP);
+		
+	}
+	
+	private void rtype()	{
+		
+		switch (raw6bits) {
+		case ADD:
+			ALUOP = ADD;
+			break;
+			
+		case SUB:
+			ALUOP = SUB;
+			break;
+			
 		case OR:
 			ALUOP = OR;
 
@@ -53,6 +79,7 @@ public class ALUControlUnit {
 		default:
 			break;
 		}
+		
 	}
 
 }
