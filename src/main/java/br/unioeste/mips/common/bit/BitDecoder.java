@@ -18,27 +18,28 @@ public class BitDecoder {
 	 * Logic to turnon a specific bit
 	 * */
 	private static Integer setbit(int whichBit, int rawCode)	{
-		
 		int set= BITMASK << (whichBit);
-		rawCode = (rawCode | set );
+		rawCode = (rawCode | set);
 		
 		return new Integer(rawCode);
 	}
+	
 	/**
 	 * Translate string to binary number
 	 * */
 	public static int toBinari(String rawInstruction)	{
-		
 		int raw = ZERO;
-		int decounter = 31;
+		int decounter = 31; //Force 32 bits
 		
-		for(int i=0; i< rawInstruction.length(); i++){
-			
-			if(rawInstruction.charAt(i) == '1'){
+		for(int i = 0; i < rawInstruction.length(); i++)	{
+			if (rawInstruction.charAt(i) == '1')	{
 				raw = setbit( decounter , raw);
 			}
 			decounter--;
 		}
+		
+		System.out.println("  #" + Integer.toBinaryString(raw));
+		
 		return raw;
 	}
 	/**
@@ -46,38 +47,29 @@ public class BitDecoder {
 	 * */
 	public Integer getRangeBits(Integer instruction, int rawBeginIndex, int rawEndIndex){
 		//Index range
-		int range	=	(rawEndIndex - rawBeginIndex);
-		
+		int range	=	(rawEndIndex - rawBeginIndex) + 1;
 		//shift range size
-		int shiftRange	=	rawBeginIndex + 1;
-		
+		int shiftRange	=	rawBeginIndex;
 		//Mask to get range
 		int mask	=	getMaskOfRangebits(range);
-		
 		//Change mask to range compatible
 		mask	=	mask << (shiftRange);
 		int result	=	ZERO;
-	
 		//Apply mask to get bits
 		result	=	(instruction & mask);
-		
-		//
 		result	=	result >>>(shiftRange);	//The operator >>> is because increase 0 on left
 		
-		return result;
+		return new Integer(result);
 	}
 	
 	public int merge(int rawHith, int rawlow)	{
-		
 		return (rawHith | rawlow);
-		
 	}
 	
 	/*
 	 * Turn on the range first bits
 	 * */
 	private int getMaskOfRangebits(int range)	{
-		
 		int result	=	ZERO;
 		
 		for (int i = 0; i < range; i++) {
