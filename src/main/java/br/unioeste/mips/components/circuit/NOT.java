@@ -13,9 +13,7 @@ public class NOT{
 		 * 
 		 * */
 		Integer result	=	(~rawPort);
-		result	=	(result & BITMASK);
-		
+		result	=	(result & BITMASK);	
 		return result;
 	}
-
 }

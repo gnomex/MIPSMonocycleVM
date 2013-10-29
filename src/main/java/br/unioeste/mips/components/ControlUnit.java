@@ -1,15 +1,16 @@
 package br.unioeste.mips.components;
 
 import static br.unioeste.mips.util.Util.ZERO;
+import br.unioeste.mips.common.vm.VMInterface;
 
-public class ControlUnit {
+public class ControlUnit implements VMInterface	{
 
 	/**
 	 * Datapath flags
 	 * ALL ZERO value dafaults!!!
 	 * */
 
-	private Integer OPCODE;
+	private Integer OPCODE = ZERO;
 
 	private Integer PCWRITECOND	=	ZERO;
 	private Integer PCWRITE	=	ZERO;
@@ -43,7 +44,6 @@ public class ControlUnit {
 		ALUSRCB	=	ZERO;
 		REGWRITE	=	Boolean.TRUE;
 		REGDST	=	ZERO;
-
 	}
 
 	public void makeSnapshot()	{
@@ -62,7 +62,6 @@ public class ControlUnit {
 		System.out.println("  >REGWRITE: " + REGWRITE);
 		System.out.println("  >REGDST: " + REGDST);
 		System.out.println("### END OF Snapshot ###\n");
-		
 	}
 	
 	public Integer getPCWRITECOND() {

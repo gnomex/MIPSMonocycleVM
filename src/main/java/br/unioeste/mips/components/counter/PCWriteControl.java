@@ -1,6 +1,8 @@
 package br.unioeste.mips.components.counter;
 
-public class PCWriteControl {
+import br.unioeste.mips.common.vm.VMInterface;
+
+public class PCWriteControl implements VMInterface {
 	
 	private Integer PCWRITECOND;
 	private Integer PCWRITE;
@@ -45,6 +47,16 @@ public class PCWriteControl {
 	}
 	public void setPCWRITE(Integer pCWRITE) {
 		PCWRITE = pCWRITE;
+	}
+
+
+	public void makeSnapshot() {
+		System.out.println("### PCWRITE Snapshot:");
+		System.out.println("  >ALU Zero Flag: " + ALUZEROFLAG);
+		System.out.println("  >ALU and PCWriteCond: " + ALUANDPCWRITECOND);
+		System.out.println("  >PCWriteCond: " + PCWRITECOND);
+		System.out.println("  >PCWrite: " + PCWRITE);
+		System.out.println("### END OF Snapshot ###\n");
 	}
 
 	

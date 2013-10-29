@@ -28,7 +28,7 @@ public class Mux2LogicalGates {
 		case 1:
 			return currentDataPortB;
 		default:
-			throw new MUXSelectionOutOfBounds("MUX Selection ["+select+"] is not valid!");
+			throw new MUXSelectionOutOfBounds("MUX Selection [" + select + "] is not valid!");
 		}
 	}
 
@@ -43,5 +43,4 @@ public class Mux2LogicalGates {
 	public void setCurrentDataPortB(Integer currentDataPortB) {
 		this.currentDataPortB = currentDataPortB;
 	}
-
 }

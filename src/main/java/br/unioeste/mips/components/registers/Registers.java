@@ -2,6 +2,7 @@ package br.unioeste.mips.components.registers;
 
 import java.util.ArrayList;
 
+import br.unioeste.mips.common.vm.VMInterface;
 import static br.unioeste.mips.util.Util.ZERO;
 
 
@@ -27,7 +28,7 @@ import static br.unioeste.mips.util.Util.ZERO;
 		
  * */
 
-public class Registers {
+public class Registers implements VMInterface{
 
 	private ArrayList<Register> dataregisters;
 	

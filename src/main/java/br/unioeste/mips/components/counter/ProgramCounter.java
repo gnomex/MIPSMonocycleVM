@@ -1,15 +1,15 @@
 package br.unioeste.mips.components.counter;
 
 import static br.unioeste.mips.util.Util.ZERO;
-import br.unioeste.mips.common.exception.IncrasePCOverflow;
 import br.unioeste.mips.common.exception.PCWritePermissionDenied;
+import br.unioeste.mips.common.vm.VMInterface;
 
 /**
  * Classe que representa o contador de instruções - Program Counter
  * 
  * */
 
-public class ProgramCounter {
+public class ProgramCounter implements VMInterface{
 
 	//Program Counter default is zero
 	private Integer programCounter = ZERO;		//
@@ -35,6 +35,10 @@ public class ProgramCounter {
 		PCWRITEFLAG = pCWRITEFLAG;
 	}
 
-
-
+	public void makeSnapshot() {
+		System.out.println("### Program Counter Snapshot:");
+		System.out.println("  >Program Counter: " + programCounter);
+		System.out.println("  >PCWRITEFLAG: " + PCWRITEFLAG.toString());
+		System.out.println("### END OF Snapshot ###\n");		
+	}
 }

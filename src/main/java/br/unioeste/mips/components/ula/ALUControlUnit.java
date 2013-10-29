@@ -1,6 +1,7 @@
 package br.unioeste.mips.components.ula;
 
 import static br.unioeste.mips.util.Util.*;
+import br.unioeste.mips.common.vm.VMInterface;
 
 /**
  * Unidade de controle da ALU
@@ -10,7 +11,7 @@ import static br.unioeste.mips.util.Util.*;
  * Jr flag- identifica instrução formato Jr
  * */	
 
-public class ALUControlUnit {
+public class ALUControlUnit implements VMInterface{
 
 	private Integer raw6bits;
 	private Integer ALUOPFLAG;
@@ -79,6 +80,11 @@ public class ALUControlUnit {
 		default:
 			break;
 		}
+		
+	}
+
+	public void makeSnapshot() {
+		// TODO Auto-generated method stub
 		
 	}
 

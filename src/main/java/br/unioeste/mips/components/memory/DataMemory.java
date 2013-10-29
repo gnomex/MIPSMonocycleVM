@@ -5,8 +5,9 @@ import java.util.ArrayList;
 import br.unioeste.mips.common.exception.MemoryPermissionDenied;
 import br.unioeste.mips.common.instruction.Instruction;
 import br.unioeste.mips.common.loader.ParserFileTXT;
+import br.unioeste.mips.common.vm.VMInterface;
 
-public class DataMemory {
+public class DataMemory implements VMInterface{
 
 	private Boolean MEMWRITE = Boolean.FALSE;
 	private Boolean MEMREAD = Boolean.FALSE;
@@ -95,5 +96,8 @@ public class DataMemory {
 		return Boolean.FALSE;
 	}
 
-
+	public void makeSnapshot() {
+		// TODO Auto-generated method stub
+		
+	}
 }

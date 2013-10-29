@@ -17,9 +17,8 @@ public class ParserFileTXT {
 
 	private BufferedReader filereader;
 	private ArrayList<Instruction> instructions;
-	
+
 	private InstructionDecoder instDecoder;
-	//private Logger logger = Logger.getLogger(ParserFileTXT.class);
 
 	public ParserFileTXT()	{
 		instDecoder = new InstructionDecoder();
@@ -27,46 +26,34 @@ public class ParserFileTXT {
 	}
 
 	public List<Instruction> loadFile() throws Exception	{
-
-
 		filereader	=	new BufferedReader(new FileReader(FILEREADER + ".txt"));
 
-		try{
+		String bufferReader;
 
-			String bufferReader;
+		while((	bufferReader = filereader.readLine() ) != null)	{
+			try{
+				bufferReader	=	formater(bufferReader);
+				int current	=	BitDecoder.toBinari(bufferReader);
+				instructions.add(instDecoder.decode(new Integer(current)));
 
-			while((	bufferReader	=	filereader.readLine()	)	!=	null)	{
-				try{
-
-					bufferReader	=	formater(bufferReader);
-					int current	=	BitDecoder.toBinari(bufferReader);
-					
-					instructions.add(instDecoder.decode(new Integer(current)));
-
-				}catch (Exception e) {
-					//logger.error("Error: " + e.getMessage());	//Logger the error	
-					continue;
-				}
+			}catch (Exception e) {
+				throw new Exception("Fail to try load file text");
 			}
-			
-			return instructions;
-
-		}catch (Exception e) {
-			throw new Exception("Fail to try load file text");
 		}
+		return instructions;
 	}
 
 
 	private String formater(String bufferReader)	throws InstructionException	{
 
 		String formated	=	bufferReader.trim();	//Remove white spaces
-		
+
 		if	(formated.length()	==	INSTRUCTIONSIZE){
 
 			return formated;
 
 		}else	{
-			
+
 			throw new InstructionException("Instruction don't have 32 bits, check de foo file!!!");
 		}
 

@@ -61,8 +61,4 @@ public class Mux4LogicalGates {
 	public void setCurrentDataPortD(Integer currentDataPortD) {
 		this.currentDataPortD = currentDataPortD;
 	}
-
-	
-
-
 }

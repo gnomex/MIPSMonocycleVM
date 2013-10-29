@@ -1,6 +1,7 @@
 package br.unioeste.mips.components;
 
 import java.awt.EventQueue;
+import java.io.Serializable;
 
 import br.unioeste.mips.common.bit.BitDecoder;
 import br.unioeste.mips.common.exception.IncrasePCOverflow;
@@ -9,6 +10,7 @@ import br.unioeste.mips.common.exception.PCWritePermissionDenied;
 import br.unioeste.mips.common.mux.Mux2LogicalGates;
 import br.unioeste.mips.common.mux.Mux4LogicalGates;
 import br.unioeste.mips.common.shift.Shifter;
+import br.unioeste.mips.common.vm.VMInterface;
 import br.unioeste.mips.components.counter.PCWriteControl;
 import br.unioeste.mips.components.counter.ProgramCounter;
 import br.unioeste.mips.components.instructions.InstructionRegister;
@@ -25,8 +27,13 @@ import static br.unioeste.mips.util.Util.LEFT;
  * Risc Multicycle datapath
  * */
 
-public class Datapath implements Cloneable{
+public class Datapath implements VMInterface, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5L;
+	
 	private ALU ula	=	null;
 	private ALUControlUnit aluControl	=	null;
 	//
@@ -150,9 +157,6 @@ public class Datapath implements Cloneable{
 	}
 
 	public void notifyFlafs()	{
-		
-		controlUnit.makeSnapshot();
-		
 		this.setSelectIORD(controlUnit.getIORD());
 		this.setSelectREGDST(controlUnit.getREGDST());
 		this.setSelectMEMTOREG(controlUnit.getMEMTOREG());
@@ -170,6 +174,8 @@ public class Datapath implements Cloneable{
 		this.setMEMWRITE(controlUnit.getMEMWRITE());
 
 		this.setREGWRITE(controlUnit.getREGWRITE());
+		//Print current control unit state
+		controlUnit.makeSnapshot();
 	}
 
 	/*
@@ -180,14 +186,12 @@ public class Datapath implements Cloneable{
 	 * @throws Exception
 	 * */
 	public void loadInstructionByAtualPC() throws Exception	{
-		
 		this.PcToIORD();
 		this.IorDToMemory();
 		this.MemoryToInstructionRegister();
 	}
 
 	public void increasePC() throws MUXSelectionOutOfBounds	{
-		
 		this.ALUSRCAToAlu();
 		this.ALUSRCBToAlu();
 		
@@ -197,11 +201,9 @@ public class Datapath implements Cloneable{
 		this.ALUCONTROLToULA();
 		this.ALUEXECUTE();
 		this.ALUToPCSource();
-		
 	}
 	
 	public void setRegisters() throws MUXSelectionOutOfBounds	{
-		
 		this.InstructionRegisterR2521ToRSRegister();
 		this.InstructionRegisterR2016ToRTRegister();
 		this.InstructionRegisterR2016ToREGDST();
@@ -211,7 +213,6 @@ public class Datapath implements Cloneable{
 		this.InstructionRegisterR150SHIFTERToALUSRCB();
 		
 		this.registers.makeSnapshot();
-		
 	}
 	
 	/*
@@ -427,22 +428,33 @@ public class Datapath implements Cloneable{
 	 * ===============================================#########################
 	 * */
 	
-	@Override
-	public Object clone() throws CloneNotSupportedException {
-
+	public Datapath clone() {
 		try {
-
-			return super.clone();
-
-		} catch (CloneNotSupportedException cnse) {
-			throw new CloneNotSupportedException("- ERROR - Impossible make a clone");
+			return this.clone();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		return null;
+	}
+	// Datapah snapshot
+	public void makeSnapshot() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	public DataMemory getMemorySnapshot()	{
 		return this.memory;
 	}
 
+//	@Override
+//	public int hashCode() {
+//		final int prime = 31;
+//		int result = 1;
+//		result = prime * result + ((id == null) ? 0 : id.hashCode());
+//		result = prime * result + ((version == null) ? 0 : version.hashCode());
+//		return result;
+//	}
+	
 	/*	Invoker - Test Only
 	 * ========================================================================
 	 * */
@@ -462,6 +474,4 @@ public class Datapath implements Cloneable{
 			}
 		});
 	}
-
-
 }

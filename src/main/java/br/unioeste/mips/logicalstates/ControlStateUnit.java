@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.unioeste.mips.common.vm.VMInterface;
 import br.unioeste.mips.components.ControlUnit;
 import br.unioeste.mips.components.Datapath;
 import br.unioeste.mips.logicalstates.abstraction.BranchCompletionState8;
@@ -23,7 +24,7 @@ import static br.unioeste.mips.util.Util.*;
  * 	identify states and make changes on VM
  * */
 
-public class ControlStateUnit {
+public class ControlStateUnit implements VMInterface{
 
 	private Datapath mipsDatapath;	//MIPS Multicycle datapath
 
@@ -141,6 +142,11 @@ public class ControlStateUnit {
 				}
 			}
 		});
+	}
+
+	public void makeSnapshot() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
