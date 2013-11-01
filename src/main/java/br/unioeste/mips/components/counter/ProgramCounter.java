@@ -19,7 +19,7 @@ public class ProgramCounter implements VMInterface{
 	public void incrasePC(Integer incrasevalue)	throws PCWritePermissionDenied{
 
 		if(PCWRITEFLAG)	{
-			this.programCounter = this.programCounter + incrasevalue;
+			this.programCounter = incrasevalue;
 			System.out.println(" ~> Increasing PC, new value are: " + this.programCounter);
 		}	else	{
 			throw new PCWritePermissionDenied("You no have permission to write on PC!!!");

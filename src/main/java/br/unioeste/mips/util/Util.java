@@ -48,6 +48,6 @@ public final class Util {
 	/*
 	 * Loggers
 	 * */
-	public static final String LOADERLOG	=	"loaderlog.log";
-	public static final String REGSBASELOG	=	"regslog.log";
+//	public static final String LOADERLOG	=	"loaderlog.log";
+//	public static final String REGSBASELOG	=	"regslog.log";
 }

@@ -44,9 +44,9 @@ public class InstructionFetchState0 implements Command{
 			dataPath.increasePC();
 			
 		} catch (Exception e) {
-			System.out.println("\n## => On State 0 - Some Errors:\n");
+			System.err.println("\n## => On State 0 - Some Errors:\n");
 			e.printStackTrace();
-			System.out.println("########## END OF STACK TRACE ON STATE 0 ##########\n");	
+			System.err.println("########## END OF STACK TRACE ON STATE 0 ##########\n");	
 		}
 		
 		System.out.println("########## END OF STATE 0 ##########\n");	

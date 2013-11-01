@@ -191,7 +191,7 @@ public class Datapath implements VMInterface, Serializable {
 		this.MemoryToInstructionRegister();
 	}
 
-	public void increasePC() throws MUXSelectionOutOfBounds	{
+	public void increasePC() throws MUXSelectionOutOfBounds, IncrasePCOverflow, PCWritePermissionDenied	{
 		this.ALUSRCAToAlu();
 		this.ALUSRCBToAlu();
 		
@@ -201,6 +201,7 @@ public class Datapath implements VMInterface, Serializable {
 		this.ALUCONTROLToULA();
 		this.ALUEXECUTE();
 		this.ALUToPCSource();
+		this.PcSourceToPC();
 	}
 	
 	public void setRegisters() throws MUXSelectionOutOfBounds	{
@@ -378,7 +379,6 @@ public class Datapath implements VMInterface, Serializable {
 	public void PcSourceToPC() throws IncrasePCOverflow, MUXSelectionOutOfBounds, PCWritePermissionDenied	{
 		System.out.println("Datapath.PcSourceToPC()");
 		pc.incrasePC(PCSOURCE.getData());
-
 	}
 
 	public void InstructionRegisterJumpAddressToPcSource()	{
@@ -423,6 +423,16 @@ public class Datapath implements VMInterface, Serializable {
 	public void setControlUnit(ControlUnit current)	{
 		this.controlUnit = current;
 	}
+	
+	/* Another POG
+	 * */
+	
+	public Boolean haveMoreInstructions()	{
+		if (memory.haveInstructions(pc.getPC()))	{
+			return Boolean.TRUE;
+		}
+		return Boolean.FALSE;
+	}
 
 	/*
 	 * ===============================================#########################
@@ -438,14 +448,15 @@ public class Datapath implements VMInterface, Serializable {
 	}
 	// Datapah snapshot
 	public void makeSnapshot() {
-		// TODO Auto-generated method stub
+		
+		System.out.println("\n\n  # # # END OF VM - Final Snapshot # # # \n");
 		
 	}
 
 	public DataMemory getMemorySnapshot()	{
 		return this.memory;
 	}
-
+	
 //	@Override
 //	public int hashCode() {
 //		final int prime = 31;

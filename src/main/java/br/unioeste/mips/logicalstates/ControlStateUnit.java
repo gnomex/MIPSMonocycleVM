@@ -2,7 +2,6 @@ package br.unioeste.mips.logicalstates;
 
 import java.awt.EventQueue;
 import java.util.ArrayList;
-import java.util.List;
 
 import br.unioeste.mips.common.vm.VMInterface;
 import br.unioeste.mips.components.ControlUnit;
@@ -37,14 +36,19 @@ public class ControlStateUnit implements VMInterface{
 
 	public void startVM()	{
 		
-		/**
-		 * 
-		 * */
-		/*
-		while (mipsDatapath.getMemorySnapshot().haveInstructions()) {
+		System.out.println("Initalizing VM States ----------------------------------------------------\n\n");
+		
+		while (mipsDatapath.haveMoreInstructions())	{
 			this.whoIsNext();
-		}*/
-		this.whoIsNext();
+			try {
+				Thread.sleep(400);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		mipsDatapath.makeSnapshot();
 		
 	}
 	
@@ -129,13 +133,8 @@ public class ControlStateUnit implements VMInterface{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-
 					ControlStateUnit stateVm = new ControlStateUnit();
-
 					stateVm.startVM();
-					
-					System.out.println("Work!");
-
 				} catch (Exception e) {
 					System.out.println("Problems :(\n\n\n###########################");
 					e.printStackTrace();

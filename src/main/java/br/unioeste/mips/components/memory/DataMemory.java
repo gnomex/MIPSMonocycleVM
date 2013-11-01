@@ -88,12 +88,20 @@ public class DataMemory implements VMInterface{
 		MEMREAD = mEMREAD;
 	}
 
-	public Boolean haveInstructions()	{
-		/**
-		 * @WARNING: Not tested Yet!!! Maybe work.
-		 * */
-		if (addressIndex <= instructions.size())	return Boolean.TRUE;
-		return Boolean.FALSE;
+	
+	/**
+	 * Some "adaptation" to check if have more instructions
+	 * */
+	
+	public Boolean haveInstructions(Integer currentIndex)	{
+		
+		try {
+			instructions.get(currentIndex);
+			return Boolean.TRUE;
+			
+		} catch(IndexOutOfBoundsException e) {
+			return Boolean.FALSE;
+		}
 	}
 
 	public void makeSnapshot() {
