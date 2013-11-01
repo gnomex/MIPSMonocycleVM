@@ -16,7 +16,14 @@ public class WriteBackState4  implements Command{
 	}
 	
 	public void performs() {
-
+		
+		controlUnit.setREGDST(0);
+		controlUnit.setREGWRITE(Boolean.TRUE);
+		controlUnit.setMEMTOREG(1);
+				
+		dataPath.setControlUnit(controlUnit);
+		dataPath.notifyFlafs();
+		
 	}
 
 }

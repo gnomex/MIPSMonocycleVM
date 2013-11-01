@@ -17,6 +17,13 @@ public class ExecutionState6  implements Command{
 	
 	public void performs() {
 		
+		controlUnit.setALUSRCA(1);
+		controlUnit.setALUSRCB(0);
+		controlUnit.setALUOP(2);
+		
+		dataPath.setControlUnit(controlUnit);
+		dataPath.notifyFlafs();
+		
 	}
 
 }

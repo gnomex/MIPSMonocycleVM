@@ -16,6 +16,13 @@ public class MemoryAcessStoreState5  implements Command{
 	}
 	
 	public void performs() {
+		
+		controlUnit.setMEMWRITE(Boolean.TRUE);
+		controlUnit.setIORD(1);
+				
+		dataPath.setControlUnit(controlUnit);
+		dataPath.notifyFlafs();
+		
 	}
 
 }

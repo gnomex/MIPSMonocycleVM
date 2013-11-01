@@ -18,7 +18,15 @@ public class BranchCompletionState8  implements Command{
 	}
 	
 	public void performs() {
-		// TODO Auto-generated method stub
+
+		controlUnit.setALUSRCA(1);
+		controlUnit.setALUSRCB(0);
+		controlUnit.setALUOP(1);
+		controlUnit.setPCWRITECOND(1);
+		controlUnit.setPCSOURCE(1);
+		
+		dataPath.setControlUnit(controlUnit);
+		dataPath.notifyFlafs();
 		
 	}
 

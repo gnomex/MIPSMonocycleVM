@@ -18,7 +18,12 @@ public class JumpCompletionState9  implements Command{
 	}
 	
 	public void performs() {
-		// TODO Auto-generated method stub
+		
+		controlUnit.setPCWRITE(1);
+		controlUnit.setPCSOURCE(2);
+				
+		dataPath.setControlUnit(controlUnit);
+		dataPath.notifyFlafs();
 		
 	}
 

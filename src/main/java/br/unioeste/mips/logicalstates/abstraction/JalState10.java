@@ -23,7 +23,9 @@ public class JalState10  implements Command{
 	}
 
 	public void performs() {
-		// TODO Auto-generated method stub
+		
+		dataPath.setControlUnit(controlUnit);
+		dataPath.notifyFlafs();
 		
 	}
 

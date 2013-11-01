@@ -18,7 +18,13 @@ public class RTypeCompletionState7  implements Command{
 	}
 
 	public void performs() {
-		// TODO Auto-generated method stub
+
+		controlUnit.setREGDST(1);
+		controlUnit.setREGWRITE(Boolean.TRUE);
+		controlUnit.setMEMTOREG(0);
+		
+		dataPath.setControlUnit(controlUnit);
+		dataPath.notifyFlafs();
 		
 	}
 

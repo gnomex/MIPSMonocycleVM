@@ -16,6 +16,12 @@ public class MemoryAcessLoadState3  implements Command{
 	}
 	
 	public void performs() {
+		
+		controlUnit.setALUSRCA(1);
+		controlUnit.setIORD(1);
+		
+		dataPath.setControlUnit(controlUnit);
+		dataPath.notifyFlafs();
 
 	}
 	
