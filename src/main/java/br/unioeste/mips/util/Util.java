@@ -32,18 +32,17 @@ public final class Util {
 	public static final int SUB	=	0x00000022; //100010 - 34
 	public static final int AND	=	0x00000024; //100100 - 36
 	public static final int OR	=	0x00000025; //100101 - 37
-	/*
-	public static final int ADDi;
-	public static final int ANDi;
-	public static final int ORi;
-	public static final int LUI;
-	public static final int LW;
-	public static final int SW;
-	public static final int BEQ;
-	public static final int BNE;
-	public static final int j;
-	public static final int jr;
-	*/
+	public static final int ADDi = 0x00000001;
+	public static final int ANDi = 0x00000002;
+	public static final int ORi = 0x00000003;
+	public static final int LUI = 0x00000004;
+	public static final int LW = 0x00000005;
+	public static final int SW = 0x00000006;
+	public static final int BEQ = 0x00000007;
+	public static final int BNE = 0x00000008;
+	public static final int j = 0x00000009;
+	public static final int jr = 0x0000000A;
+	public static final int LDI = 0x0000000B;
 	
 	/*
 	 * Loggers

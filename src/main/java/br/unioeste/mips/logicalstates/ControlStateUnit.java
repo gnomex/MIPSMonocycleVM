@@ -16,6 +16,7 @@ import br.unioeste.mips.logicalstates.abstraction.MemoryAcessStoreState5;
 import br.unioeste.mips.logicalstates.abstraction.MemoryAddressState2;
 import br.unioeste.mips.logicalstates.abstraction.MemoryLDIState12;
 import br.unioeste.mips.logicalstates.abstraction.RTypeCompletionState7;
+import br.unioeste.mips.logicalstates.abstraction.WriteBackState4;
 import static br.unioeste.mips.util.Util.*;
 
 /**
@@ -35,9 +36,9 @@ public class ControlStateUnit implements VMInterface{
 	}
 
 	public void startVM()	{
-		
+
 		System.out.println("Initalizing VM States ----------------------------------------------------\n\n");
-		
+
 		while (mipsDatapath.haveMoreInstructions())	{
 			this.whoIsNext();
 			try {
@@ -47,11 +48,11 @@ public class ControlStateUnit implements VMInterface{
 				e.printStackTrace();
 			}
 		}
-		
+
 		mipsDatapath.makeSnapshot();
-		
+
 	}
-	
+
 	private void whoIsNext()	{
 
 		ArrayList<Command> commands = new ArrayList<Command>();
@@ -62,54 +63,52 @@ public class ControlStateUnit implements VMInterface{
 		commands.add(new InstructionFetchState0(mipsDatapath, controlUnit));
 		commands.add(new InstructionDecodeState1(mipsDatapath, controlUnit));
 
-		//POG - Execute only 2 first states
-		this.execute(commands);
-/*
 		switch (controlUnit.getOPCODE()) {
 		case OPCODE_RTYPE:
 			commands.add(new ExecutionState6(mipsDatapath, controlUnit));
 			commands.add(new RTypeCompletionState7(mipsDatapath, controlUnit));
-			this.execute(commands);
 			break;
 
-		case OPCODE_ITYPE:
-
+		case LW:
 			commands.add(new MemoryAddressState2(mipsDatapath, controlUnit));
-
-			switch (key) {
-			case LW:
-				commands.add(new MemoryAcessLoadState3(mipsDatapath, controlUnit));
-
-			case SW:
-				commands.add(new MemoryAcessStoreState5(mipsDatapath, controlUnit));
-
-			case LDI;
-				commands.add(new MemoryLDIState12(mipsDatapath, controlUnit));
-			}
-
-			this.execute(commands);
-
+			commands.add(new MemoryAcessLoadState3(mipsDatapath, controlUnit));
+			commands.add(new WriteBackState4(mipsDatapath, controlUnit));
 			break;
 
-		case OPCODE_JTYPE:
+		case SW:
+			commands.add(new MemoryAddressState2(mipsDatapath, controlUnit));
+			commands.add(new MemoryAcessStoreState5(mipsDatapath, controlUnit));
+			break;
+
+		case LDI:
+			commands.add(new MemoryLDIState12(mipsDatapath, controlUnit));
+			break;
+			//			}
+
+		case OPCODE_JTYPE:	
 			commands.add(new JumpCompletionState9(mipsDatapath, controlUnit));
-
-
-			this.execute(commands);
-
 			break;
 
 		case BEQ:
-
 			commands.add(new BranchCompletionState8(mipsDatapath, controlUnit));
-			
 			break;
 
 		default:
-			throw new Exception("-- Error, no have a state to execute!!!");
+			try {
+				throw new Exception("-- Error, no have a state to execute!!!");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			break;
 		}
-*/
+
+		/**
+		 * The most important line
+		 * 	=> Execute!
+		 * */
+		this.execute(commands);
+
 	}
 
 	private void execute(ArrayList<Command> commands)	{
@@ -125,7 +124,7 @@ public class ControlStateUnit implements VMInterface{
 			e.printStackTrace();
 		}
 	}
-	
+
 	/*	Invoker
 	 * ========================================================================
 	 * */
@@ -145,7 +144,7 @@ public class ControlStateUnit implements VMInterface{
 
 	public void makeSnapshot() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

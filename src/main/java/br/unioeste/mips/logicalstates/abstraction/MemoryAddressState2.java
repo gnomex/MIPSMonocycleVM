@@ -16,9 +16,13 @@ public class MemoryAddressState2  implements Command{
 	}
 	
 	public void performs() {
-		//dataPath.setSelectALUSRCA(new Integer(1));
-		//dataPath.setSelectALUSRCB(new Integer(2));
-		dataPath.setALUOP(new Integer(0));
+		
+		controlUnit.setALUSRCA(1);
+		controlUnit.setALUSRCB(2);
+		controlUnit.setALUOP(0);
+		
+		dataPath.setControlUnit(controlUnit);
+		dataPath.notifyFlafs();
 		
 	}
 

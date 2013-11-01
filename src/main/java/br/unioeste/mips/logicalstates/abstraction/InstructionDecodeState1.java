@@ -32,9 +32,9 @@ public class InstructionDecodeState1 implements Command{
 			dataPath.setRegisters();
 			
 		} catch (Exception e) {
-			System.out.println("\n## => On State 1 - Some Errors:\n");
+			System.err.println("\n## => On State 1 - Some Errors:\n");
 			e.printStackTrace();
-			System.out.println("########## END OF STACK TRACE ON STATE 1 ##########\n");	
+			System.err.println("########## END OF STACK TRACE ON STATE 1 ##########\n");	
 		}
 		
 		System.out.println("########## END OF STATE 1 ##########\n");	
